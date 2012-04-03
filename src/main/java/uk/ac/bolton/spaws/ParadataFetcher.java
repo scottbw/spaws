@@ -83,7 +83,7 @@ public class ParadataFetcher {
 		//
 		for (int i=0;i<records.length();i++){
 			JSONObject record = records.getJSONObject(i);
-			ISubmission rating = SubmissionFactory.createSubmission(record);
+			ISubmission rating = SubmissionFactory.createSubmission(record, this.widgetIdentifier);
 			if (rating != null){
 				submissions.add(rating);
 			}

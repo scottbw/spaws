@@ -29,9 +29,10 @@ import uk.ac.bolton.spaws.model.impl.Submission;
 
 public class SubmissionFactory {
 	
-	public static Submission createSubmission(JSONObject object) throws JSONException, ParseException{
+	public static Submission createSubmission(JSONObject object, String resourceURL) throws JSONException, ParseException{
 		
 		Submission submission = new Submission();
+		submission.setResourceURL(resourceURL);
 		
 		//
 		// Set the action 
