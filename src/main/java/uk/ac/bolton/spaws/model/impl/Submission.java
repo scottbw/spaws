@@ -133,5 +133,26 @@ public class Submission implements ISubmission {
 			return null;
 		}
 	}
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object other) {
+		
+		//
+		// We're overriding equals for submissions in that if its the same actor using the same verb for the same
+		// resource then its a duplicate.
+		//
+		if ( this.getActor().getName().equals( ((ISubmission)other).getActor().getName()) ){
+			if ( this.getAction().getVerb().equals( ((ISubmission)other).getAction().getVerb())){
+				if ( this.getResourceURL().equals( ((ISubmission)other).getResourceURL())){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 }
