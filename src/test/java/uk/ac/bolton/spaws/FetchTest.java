@@ -15,17 +15,22 @@
  */
 package uk.ac.bolton.spaws;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import uk.ac.bolton.spaws.model.ISubmission;
+import uk.ac.bolton.spaws.model.util.RatingSubmissionsFilter;
 
 public class FetchTest {
 	
 	@Test
 	public void fetch() throws Exception{
 		ParadataFetcher fetcher = new ParadataFetcher("http", "alpha.mimas.ac.uk", "http://wookie.apache.org/widgets/youtube");
-		for (ISubmission submission: fetcher.getSubmissions()){
-			System.out.println("Rating: "+submission.getRating().getRating() + " From: " + submission.getActor().getName());
+		List<ISubmission> submissions = new RatingSubmissionsFilter().filter(fetcher.getSubmissions());
+		
+		for (ISubmission submission:submissions){
+			System.out.println("Rating: "+submission.getRating().getRating() + " From: " + submission.getActor().getName() + " Date:"+submission.getUpdated().toGMTString());
 		}
 		
 	}
