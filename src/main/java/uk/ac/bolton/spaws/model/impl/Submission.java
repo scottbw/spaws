@@ -15,6 +15,8 @@
  */
 package uk.ac.bolton.spaws.model.impl;
 
+import java.util.Date;
+
 import com.navnorth.learningregistry.LRActivity;
 
 import uk.ac.bolton.spaws.Submitter;
@@ -25,10 +27,25 @@ import uk.ac.bolton.spaws.model.ISubmission;
 
 public class Submission implements ISubmission {
 
+	/**
+	 * @return the submitted
+	 */
+	public Date getUpdated() {
+		return updated;
+	}
+
+	/**
+	 * @param submitted the submitted to set
+	 */
+	public void setUpdated(Date submitted) {
+		this.updated = submitted;
+	}
+
 	private Submitter submitter;
 	private String resourceURL;
 	private IParadata action;
 	private IActor actor;
+	private Date updated;
 	
 	public Submission(){
 		

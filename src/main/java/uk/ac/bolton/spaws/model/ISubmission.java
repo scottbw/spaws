@@ -16,6 +16,8 @@
 package uk.ac.bolton.spaws.model;
 
 
+import java.util.Date;
+
 import uk.ac.bolton.spaws.Submitter;
 
 import com.navnorth.learningregistry.LRActivity;
@@ -72,5 +74,15 @@ public interface ISubmission {
 	 */
 	public abstract IRating getRating();
 	
-
+	/**
+	 * Get the date the submission was published
+	 * @return
+	 */
+	public abstract Date getUpdated();
+	
+	/**
+	 * Set the data the submission was published
+	 * @param date
+	 */
+	public abstract void setUpdated(Date date);
 }
