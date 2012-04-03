@@ -16,6 +16,8 @@
 package uk.ac.bolton.spaws.model;
 
 
+import uk.ac.bolton.spaws.Submitter;
+
 import com.navnorth.learningregistry.LRActivity;
 
 public interface ISubmission {
@@ -23,55 +25,17 @@ public interface ISubmission {
 	public abstract LRActivity getActivity();
 
 	/**
-	 * @return the signer
+	 * Set the submitter for the submission
+	 * @param submitter
 	 */
-	public abstract String getSigner();
-
+	public abstract void setSubmitter(Submitter submitter);
+	
 	/**
-	 * @param signer the signer to set
+	 * Get the submitter for this submission
+	 * @return
 	 */
-	public abstract void setSigner(String signer);
-
-	/**
-	 * @return the submitter
-	 */
-	public abstract String getSubmitter();
-
-	/**
-	 * @param submitter the submitter to set
-	 */
-	public abstract void setSubmitter(String submitter);
-
-	/**
-	 * @return the submitterType
-	 */
-	public abstract String getSubmitterType();
-
-	/**
-	 * @param submitterType the submitterType to set
-	 */
-	public abstract void setSubmitterType(String submitterType);
-
-	/**
-	 * @return the submissionTOS
-	 */
-	public abstract String getSubmissionTOS();
-
-	/**
-	 * @param submissionTOS the submissionTOS to set
-	 */
-	public abstract void setSubmissionTOS(String submissionTOS);
-
-	/**
-	 * @return the submissionAttribution
-	 */
-	public abstract String getSubmissionAttribution();
-
-	/**
-	 * @param submissionAttribution the submissionAttribution to set
-	 */
-	public abstract void setSubmissionAttribution(String submissionAttribution);
-
+	public abstract Submitter getSubmitter();
+	
 	/**
 	 * @return the action
 	 */
@@ -101,5 +65,12 @@ public interface ISubmission {
 	 * @param resourceURL the resourceURL to set
 	 */
 	public abstract void setResourceURL(String resourceURL);
+	
+	/**
+	 * Get the rating of the submission, if this is a valid type
+	 * @return
+	 */
+	public abstract IRating getRating();
+	
 
 }

@@ -17,17 +17,15 @@ package uk.ac.bolton.spaws.model.impl;
 
 import com.navnorth.learningregistry.LRActivity;
 
+import uk.ac.bolton.spaws.Submitter;
 import uk.ac.bolton.spaws.model.IActor;
 import uk.ac.bolton.spaws.model.IParadata;
+import uk.ac.bolton.spaws.model.IRating;
 import uk.ac.bolton.spaws.model.ISubmission;
 
 public class Submission implements ISubmission {
-	
-	private String signer = "SPAWS-TEST";
-	private String submitter = "SPAWS-TEST";
-	private String submitterType = "agent";
-	private String submissionTOS = "http://creativecommons.org/licenses/by/3.0/";
-	private String submissionAttribution = "SPAWS-TEST";
+
+	private Submitter submitter;
 	private String resourceURL;
 	private IParadata action;
 	private IActor actor;
@@ -40,13 +38,21 @@ public class Submission implements ISubmission {
 		setActor(actor);
 		setAction(rating);
 		setResourceURL(resourceUrl);
+		setSubmitter(new Submitter());
+	}
+	
+	public Submission(Submitter submitter, Actor actor, Rating rating, String resourceUrl){
+		setActor(actor);
+		setAction(rating);
+		setResourceURL(resourceUrl);
+		setSubmitter(submitter);
 	}
 	
 	/* (non-Javadoc)
 	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#getActivity()
 	 */
 	public LRActivity getActivity(){
-		LRActivity activity = new LRActivity(getResourceURL(), getSubmitter(), getSubmitterType(), getSubmissionTOS(), getSubmissionAttribution(), getSigner());
+		LRActivity activity = new LRActivity(getResourceURL(), getSubmitter().getSubmitter(), getSubmitter().getSubmitterType(), getSubmitter().getSubmissionTOS(), getSubmitter().getSubmissionAttribution(), getSubmitter().getSigner());
 		activity.addActor("actor", getActor().getName(), null, null);
 		activity.addVerb(getAction().getVerb(), null, null, null, null);
 		getAction().addMeasure(activity);
@@ -54,66 +60,6 @@ public class Submission implements ISubmission {
 		return activity;
 	}
 	
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#getSigner()
-	 */
-	public String getSigner() {
-		return signer;
-	}
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#setSigner(java.lang.String)
-	 */
-	public void setSigner(String signer) {
-		this.signer = signer;
-	}
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#getSubmitter()
-	 */
-	public String getSubmitter() {
-		return submitter;
-	}
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#setSubmitter(java.lang.String)
-	 */
-	public void setSubmitter(String submitter) {
-		this.submitter = submitter;
-	}
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#getSubmitterType()
-	 */
-	public String getSubmitterType() {
-		return submitterType;
-	}
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#setSubmitterType(java.lang.String)
-	 */
-	public void setSubmitterType(String submitterType) {
-		this.submitterType = submitterType;
-	}
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#getSubmissionTOS()
-	 */
-	public String getSubmissionTOS() {
-		return submissionTOS;
-	}
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#setSubmissionTOS(java.lang.String)
-	 */
-	public void setSubmissionTOS(String submissionTOS) {
-		this.submissionTOS = submissionTOS;
-	}
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#getSubmissionAttribution()
-	 */
-	public String getSubmissionAttribution() {
-		return submissionAttribution;
-	}
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#setSubmissionAttribution(java.lang.String)
-	 */
-	public void setSubmissionAttribution(String submissionAttribution) {
-		this.submissionAttribution = submissionAttribution;
-	}
 	/* (non-Javadoc)
 	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#getAction()
 	 */
@@ -149,6 +95,26 @@ public class Submission implements ISubmission {
 	 */
 	public void setResourceURL(String resourceURL) {
 		this.resourceURL = resourceURL;
+	}
+
+	public void setSubmitter(Submitter submitter) {
+		this.submitter = submitter;
+	}
+
+	public Submitter getSubmitter() {
+		return submitter;
+	}
+	
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.ISubmission#getRating()
+	 */
+	public IRating getRating() {
+		try {
+			IRating rating = (IRating)getAction();
+			return rating;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }
