@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.navnorth.learningregistry.LRImporter;
@@ -65,11 +66,25 @@ public class ParadataFetcher {
 	 */
 	public List<ISubmission> getSubmissions() throws Exception{
 		
-		ArrayList<ISubmission> submissions = new ArrayList<ISubmission>();
+		List<ISubmission> submissions = new ArrayList<ISubmission>();
 		
 		LRImporter importer = new LRImporter(nodeDomain, nodeProtocol);
+		
+		submissions = getMoreSubmissions(importer, submissions, null);
+		
+		return submissions;
+	}
 	
-		LRResult result = importer.getObtainJSONData(widgetIdentifier, true, false, false);
+	private List<ISubmission> getMoreSubmissions(LRImporter importer, List<ISubmission> submissions, String resumptionToken) throws Exception{
+		
+		LRResult result;
+		
+		if (resumptionToken == null){
+			result = importer.getObtainJSONData(widgetIdentifier, true, false, false);
+		} else {
+			System.out.println("\n\n"+resumptionToken);
+			result = importer.getObtainJSONData(resumptionToken);
+		}
 		
 		//
 		// If there are no results return an empty List
@@ -87,6 +102,13 @@ public class ParadataFetcher {
 			if (rating != null){
 				submissions.add(rating);
 			}
+		}
+		
+		//
+		// If there is a resumption token, get the next result set
+		//
+		if (result.getResumptionToken() != null && !result.getResumptionToken().equals("null")){
+			submissions = getMoreSubmissions(importer, submissions, result.getResumptionToken());
 		}
 		
 		return submissions;
