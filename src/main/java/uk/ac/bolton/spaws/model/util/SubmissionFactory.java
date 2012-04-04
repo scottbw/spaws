@@ -23,6 +23,7 @@ import java.util.TimeZone;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import uk.ac.bolton.spaws.Submitter;
 import uk.ac.bolton.spaws.model.IActor;
 import uk.ac.bolton.spaws.model.IRating;
 import uk.ac.bolton.spaws.model.impl.Submission;
@@ -55,7 +56,11 @@ public class SubmissionFactory {
 		Date date = df.parse(updated);
 		submission.setUpdated(date);
 		
-		// TODO submitter
+		//
+		// Set the submitter
+		//
+		Submitter submitter = SubmitterFactory.createSubmitter(object);
+		submission.setSubmitter(submitter);
 		
 		return submission;
 	}
