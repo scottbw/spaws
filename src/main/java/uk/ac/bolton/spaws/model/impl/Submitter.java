@@ -13,12 +13,14 @@
  *  See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.ac.bolton.spaws;
+package uk.ac.bolton.spaws.model.impl;
+
+import uk.ac.bolton.spaws.model.ISubmitter;
 
 /**
  * Model for a submitter - an organisation that publishes submissions to a node
  */
-public class Submitter {
+public class Submitter implements ISubmitter {
 	
 	private String signer = "SPAWS-TEST";
 	private String submitter = "SPAWS-TEST";
@@ -26,62 +28,62 @@ public class Submitter {
 	private String submissionTOS = "http://creativecommons.org/licenses/by/3.0/";
 	private String submissionAttribution = "SPAWS-TEST";
 	
-	/**
-	 * @return the signer
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#getSigner()
 	 */
 	public String getSigner() {
 		return signer;
 	}
-	/**
-	 * @param signer the signer to set
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#setSigner(java.lang.String)
 	 */
 	public void setSigner(String signer) {
 		this.signer = signer;
 	}
-	/**
-	 * @return the submitter
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#getSubmitter()
 	 */
 	public String getSubmitter() {
 		return submitter;
 	}
-	/**
-	 * @param submitter the submitter to set
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#setSubmitter(java.lang.String)
 	 */
 	public void setSubmitter(String submitter) {
 		this.submitter = submitter;
 	}
-	/**
-	 * @return the submitterType
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#getSubmitterType()
 	 */
 	public String getSubmitterType() {
 		return submitterType;
 	}
-	/**
-	 * @param submitterType the submitterType to set
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#setSubmitterType(java.lang.String)
 	 */
 	public void setSubmitterType(String submitterType) {
 		this.submitterType = submitterType;
 	}
-	/**
-	 * @return the submissionTOS
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#getSubmissionTOS()
 	 */
 	public String getSubmissionTOS() {
 		return submissionTOS;
 	}
-	/**
-	 * @param submissionTOS the submissionTOS to set
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#setSubmissionTOS(java.lang.String)
 	 */
 	public void setSubmissionTOS(String submissionTOS) {
 		this.submissionTOS = submissionTOS;
 	}
-	/**
-	 * @return the submissionAttribution
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#getSubmissionAttribution()
 	 */
 	public String getSubmissionAttribution() {
 		return submissionAttribution;
 	}
-	/**
-	 * @param submissionAttribution the submissionAttribution to set
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.impl.ISubmitter#setSubmissionAttribution(java.lang.String)
 	 */
 	public void setSubmissionAttribution(String submissionAttribution) {
 		this.submissionAttribution = submissionAttribution;
@@ -92,8 +94,8 @@ public class Submitter {
 	 */
 	@Override
 	public boolean equals(Object object) {
-		if (this.submitter.equals(((Submitter)object).getSubmitter())){
-			if (this.getSubmitterType().equals(((Submitter)object).getSubmitterType())){
+		if (this.submitter.equals(((ISubmitter)object).getSubmitter())){
+			if (this.getSubmitterType().equals(((ISubmitter)object).getSubmitterType())){
 				return true;
 			}
 		}
