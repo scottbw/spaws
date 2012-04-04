@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.navnorth.learningregistry.LRImporter;
@@ -61,8 +60,10 @@ public class ParadataFetcher {
 		this.widgetIdentifier = identifier;
 	}
 	
-	/*
-	 * Get all paradata submissions
+	/**
+	 * Get the submissions associated with the resource
+	 * @return a List of ISubmission objects
+	 * @throws Exception
 	 */
 	public List<ISubmission> getSubmissions() throws Exception{
 		
@@ -75,22 +76,40 @@ public class ParadataFetcher {
 		return submissions;
 	}
 	
+	/**
+	 * Recursively add submissions by paging through a result set
+	 * @param importer the LRImporter being used to obtain results
+	 * @param submissions the List of submissions found so far
+	 * @param resumptionToken the token from the last request made
+	 * @return the updated List of ISubmissions
+	 * @throws Exception
+	 */
 	private List<ISubmission> getMoreSubmissions(LRImporter importer, List<ISubmission> submissions, String resumptionToken) throws Exception{
 		
 		LRResult result;
 		
+
 		if (resumptionToken == null){
+			//
+			// If there is no resumption token, this is the first request so
+			// supply all the parameters for the initial request
+			//
 			result = importer.getObtainJSONData(widgetIdentifier, true, false, false);
 		} else {
-			System.out.println("\n\n"+resumptionToken);
+			//
+			// If there is a resumption token, use it to obtain the next paged set of results
+			//
 			result = importer.getObtainJSONData(resumptionToken);
 		}
 		
 		//
-		// If there are no results return an empty List
+		// If there are no results return the initial List without modification
 		//
 		if (result == null || result.getDocuments().size() == 0) return submissions;
 		
+		//
+		// Get the result document
+		//
 		JSONArray records = result.getDocuments().get(0).getJSONArray("document");
 		
 		//
@@ -105,7 +124,9 @@ public class ParadataFetcher {
 		}
 		
 		//
-		// If there is a resumption token, get the next result set
+		// If there is a resumption token, get the next result set by 
+		// calling this method again and passing in both the token and
+		// the submissions List
 		//
 		if (result.getResumptionToken() != null && !result.getResumptionToken().equals("null")){
 			submissions = getMoreSubmissions(importer, submissions, result.getResumptionToken());
