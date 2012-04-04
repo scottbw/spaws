@@ -19,11 +19,11 @@ import java.util.Date;
 
 import com.navnorth.learningregistry.LRActivity;
 
-import uk.ac.bolton.spaws.Submitter;
 import uk.ac.bolton.spaws.model.IActor;
 import uk.ac.bolton.spaws.model.IParadata;
 import uk.ac.bolton.spaws.model.IRating;
 import uk.ac.bolton.spaws.model.ISubmission;
+import uk.ac.bolton.spaws.model.ISubmitter;
 
 public class Submission implements ISubmission {
 
@@ -41,7 +41,7 @@ public class Submission implements ISubmission {
 		this.updated = submitted;
 	}
 
-	private Submitter submitter;
+	private ISubmitter submitter;
 	private String resourceURL;
 	private IParadata action;
 	private IActor actor;
@@ -58,11 +58,19 @@ public class Submission implements ISubmission {
 		setSubmitter(new Submitter());
 	}
 	
-	public Submission(Submitter submitter, Actor actor, Rating rating, String resourceUrl){
+	public Submission(ISubmitter submitter, Actor actor, Rating rating, String resourceUrl){
 		setActor(actor);
 		setAction(rating);
 		setResourceURL(resourceUrl);
 		setSubmitter(submitter);
+	}
+	
+	public Submission(ISubmitter submitter, Actor actor, Rating rating, String resourceUrl, Date updated){
+		setActor(actor);
+		setAction(rating);
+		setResourceURL(resourceUrl);
+		setSubmitter(submitter);
+		setUpdated(updated);
 	}
 	
 	/* (non-Javadoc)
@@ -114,11 +122,11 @@ public class Submission implements ISubmission {
 		this.resourceURL = resourceURL;
 	}
 
-	public void setSubmitter(Submitter submitter) {
+	public void setSubmitter(ISubmitter submitter) {
 		this.submitter = submitter;
 	}
 
-	public Submitter getSubmitter() {
+	public ISubmitter getSubmitter() {
 		return submitter;
 	}
 	

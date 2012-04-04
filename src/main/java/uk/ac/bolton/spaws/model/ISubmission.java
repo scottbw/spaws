@@ -18,7 +18,6 @@ package uk.ac.bolton.spaws.model;
 
 import java.util.Date;
 
-import uk.ac.bolton.spaws.Submitter;
 
 import com.navnorth.learningregistry.LRActivity;
 
@@ -30,13 +29,13 @@ public interface ISubmission {
 	 * Set the submitter for the submission
 	 * @param submitter
 	 */
-	public abstract void setSubmitter(Submitter submitter);
+	public abstract void setSubmitter(ISubmitter submitter);
 	
 	/**
 	 * Get the submitter for this submission
 	 * @return
 	 */
-	public abstract Submitter getSubmitter();
+	public abstract ISubmitter getSubmitter();
 	
 	/**
 	 * @return the action
