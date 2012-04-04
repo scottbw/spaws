@@ -1,32 +1,66 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>uk.ac.bolton</groupId>
-  <artifactId>spaws</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>SPAWS</name>
-  
-  <dependencies>
-  <dependency>
-            <groupId>com.navnorth.learningregistry</groupId>
-            <artifactId>LRJavaLib</artifactId>
-            <version>0.1.2</version>
-        </dependency>
-         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.7</version>
-        </dependency>
-  </dependencies>
-  
-  <build>
-  <plugins>
-      <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-surefire-plugin</artifactId>
-      <configuration>
-          <redirectTestOutputToFile>true</redirectTestOutputToFile>
-      </configuration>
-      </plugin>
-  </plugins>
-</build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>uk.ac.bolton</groupId>
+	<artifactId>spaws</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>SPAWS</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.navnorth.learningregistry</groupId>
+			<artifactId>LRJavaLib</artifactId>
+			<version>0.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+		</dependency>
+	</dependencies>
+
+	<scm>
+		<connection>scm:git:https://github.com/scottbw/spaws</connection>
+		<developerConnection>scm:git:https://github.com/scottbw/spaws</developerConnection>
+		<url>scm:git:git://github.com/scottbw/spaws.git</url>
+	</scm>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<redirectTestOutputToFile>true</redirectTestOutputToFile>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>downloads-maven-plugin</artifactId>
+				<version>0.4</version>
+				<configuration>
+					<description>${project.version} release of ${project.name}</description>
+					<override>true</override>
+					<includeAttached>true</includeAttached>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>upload</goal>
+						</goals>
+						<phase>install</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>oss-sonatype-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+
 </project>
