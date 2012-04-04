@@ -44,5 +44,24 @@ public class SubmitterSubmissionsFilter {
 		
 		return filteredSubmissions;
 	}
+	
+	/**
+	 * Filter a set of submissions only including those from the supplied submitter
+	 * @param submissions the list of submissions to filter
+	 * @param submitter the submitter whose submissions should be included in the results
+	 * @return the filtered list of submissions
+	 */
+	public List<ISubmission> include(List<ISubmission> submissions, ISubmitter submitter){
+		
+		ArrayList<ISubmission> filteredSubmissions = new ArrayList<ISubmission>();
+		
+		for (ISubmission submission: submissions){
+			if (submission.getSubmitter().equals(submitter)){
+				filteredSubmissions.add(submission);
+			}
+		}
+		
+		return filteredSubmissions;
+	}
 
 }
