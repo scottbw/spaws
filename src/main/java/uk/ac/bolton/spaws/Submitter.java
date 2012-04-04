@@ -86,5 +86,18 @@ public class Submitter {
 	public void setSubmissionAttribution(String submissionAttribution) {
 		this.submissionAttribution = submissionAttribution;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object object) {
+		if (this.submitter.equals(((Submitter)object).getSubmitter())){
+			if (this.getSubmitterType().equals(((Submitter)object).getSubmitterType())){
+				return true;
+			}
+		}
+		return false;
+	}	
 
 }
