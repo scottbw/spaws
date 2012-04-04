@@ -20,11 +20,11 @@ import java.util.List;
 
 import com.navnorth.learningregistry.LRException;
 
+import uk.ac.bolton.spaws.filter.RatingSubmissionsFilter;
+import uk.ac.bolton.spaws.filter.SubmitterSubmissionsFilter;
 import uk.ac.bolton.spaws.model.INode;
 import uk.ac.bolton.spaws.model.ISubmission;
 import uk.ac.bolton.spaws.model.ISubmitter;
-import uk.ac.bolton.spaws.model.util.RatingSubmissionsFilter;
-import uk.ac.bolton.spaws.model.util.SubmitterSubmissionsFilter;
 
 public class ParadataManager {
 	
@@ -36,25 +36,55 @@ public class ParadataManager {
 		this.node = node;
 	}
 
+	/**
+	 * Return all paradata for a resource of all types from other submitters for the resource
+	 * @param resourceUrl
+	 * @return
+	 * @throws Exception
+	 */
 	public List<ISubmission> getExternalSubmissions(String resourceUrl) throws Exception{
 		ParadataFetcher fetcher = new ParadataFetcher(node, resourceUrl);
 		return new SubmitterSubmissionsFilter().omit(fetcher.getSubmissions(), submitter);
 	}
 	
+	/**
+	 * Return all rating submissions from other submitters for the resource
+	 * @param resourceUrl
+	 * @return
+	 * @throws Exception
+	 */
 	public List<ISubmission> getExternalRatingSubmissions(String resourceUrl) throws Exception{
 		ParadataFetcher fetcher = new ParadataFetcher(node, resourceUrl);
 		return new SubmitterSubmissionsFilter().omit(new RatingSubmissionsFilter().filter(fetcher.getSubmissions()), submitter);
 	}
 	
+	/**
+	 * Return all rating submissions from this submitter for the resource
+	 * @param resourceUrl
+	 * @return
+	 * @throws Exception
+	 */
 	public List<ISubmission> getMyRatingSubmissions(String resourceUrl) throws Exception{
 		return getRatingSubmissionsForSubmitter(this.submitter, resourceUrl);
 	}
 	
+	/**
+	 * Return all rating submissions from the supplied submitter about the resource
+	 * @param submitter
+	 * @param resourceUrl
+	 * @return
+	 * @throws Exception
+	 */
 	public List<ISubmission> getRatingSubmissionsForSubmitter(ISubmitter submitter, String resourceUrl) throws Exception{
 		ParadataFetcher fetcher = new ParadataFetcher(node, resourceUrl);
 		return new SubmitterSubmissionsFilter().include(new RatingSubmissionsFilter().filter(fetcher.getSubmissions()), submitter);
 	}
 	
+	/**
+	 * Publish a collection of submissions; this can be a mix of submission types and be about different resources
+	 * @param submissions
+	 * @throws Exception
+	 */
 	public void publishSubmissions(List<ISubmission> submissions) throws Exception{
 		ParadataPublisher publisher = new ParadataPublisher(node);
 		for (ISubmission submission: submissions){

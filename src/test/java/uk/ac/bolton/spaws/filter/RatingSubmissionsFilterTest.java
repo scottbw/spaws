@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.ac.bolton.spaws.model.util;
+package uk.ac.bolton.spaws.filter;
 
 import static org.junit.Assert.assertEquals;
 
