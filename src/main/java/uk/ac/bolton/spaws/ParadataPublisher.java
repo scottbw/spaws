@@ -16,8 +16,8 @@
 package uk.ac.bolton.spaws;
 
 import java.util.List;
-import java.util.logging.Logger;
 
+import uk.ac.bolton.spaws.model.INode;
 import uk.ac.bolton.spaws.model.ISubmission;
 
 import com.navnorth.learningregistry.LRActivity;
@@ -37,23 +37,18 @@ public class ParadataPublisher {
 	/**
 	 * The LR Node we publish to
 	 */
-    private String nodeDomain;	
+    private INode node;	
     
     /**
      * The LR Signer that signs the envelope
      */
     private LRSigner signer;
-    
-    private String username;
-    
-    private String password;
-
 	
 	public ParadataPublisher(){
 	}
 
-	public ParadataPublisher(String nodeDomain){
-		this.nodeDomain = nodeDomain;
+	public ParadataPublisher(INode node){
+		this.node = node;
 	}
 	
 	/**
@@ -70,9 +65,9 @@ public class ParadataPublisher {
 		
 		// Setup exporter
 		int batchSize = 1;
-		LRExporter exporterLR = new LRExporter(batchSize, this.nodeDomain);
-		if (username != null) exporterLR.setPublishAuthUser(username);
-		if (password != null) exporterLR.setPublishAuthPassword(password);
+		LRExporter exporterLR = new LRExporter(batchSize, this.node.getHost());
+		if (this.node.getUsername() != null) exporterLR.setPublishAuthUser(this.node.getUsername());
+		if (this.node.getPassword() != null) exporterLR.setPublishAuthPassword(this.node.getPassword());
 		
 		// Configure exporter
 		try {
@@ -105,56 +100,9 @@ public class ParadataPublisher {
 			e.printStackTrace();
 			throw e;
 		}
-
-		if (debug) output(responses);
 		
 	}
 	
-	public void output(List<LRResponse> responses){
-		for (LRResponse res : responses)
-		{
-			System.out.print("<h2>Batch Results</h2>");
-			System.out.print("Status Code: " + res.getStatusCode() + "<br/>");
-			System.out.print("Status Reason: " + res.getStatusReason() + "<br/>");
-			System.out.print("Batch Success: " + res.getBatchSuccess() + "<br/>");
-			System.out.print("Batch Response: " + res.getBatchResponse() + "<br/><br/>");
-
-			System.out.print("<h3>Published Resource(s)</h3>");        
-			for(String id : res.getResourceSuccess())
-			{
-				System.out.print("Id: <a href=\"http://" + nodeDomain + "/harvest/getrecord?by_doc_ID=T&request_ID=" + id + "\" target=_\"blank\">" + id + "</a><br/>");
-			}
-
-			if (!res.getResourceFailure().isEmpty())
-			{
-				System.out.print("<br/>");
-				System.out.print("<h3>Publish Errors</h3>");
-
-				for(String message : res.getResourceFailure()) 
-				{
-					System.out.print("Error: " + message);
-					System.out.print("<br/>");
-				}
-			}
-		}
-		System.out.print("</div><hr />");
-
-	}
-	
-	/**
-	 * @return the nodeDomain
-	 */
-	public String getNodeDomain() {
-		return nodeDomain;
-	}
-
-	/**
-	 * @param nodeDomain the nodeDomain to set
-	 */
-	public void setNodeDomain(String nodeDomain) {
-		this.nodeDomain = nodeDomain;
-	}
-
 	/**
 	 * @return the signerLR
 	 */
@@ -181,34 +129,6 @@ public class ParadataPublisher {
 	 */
 	public void setDebug(boolean debug) {
 		this.debug = debug;
-	}
-
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
-
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 }

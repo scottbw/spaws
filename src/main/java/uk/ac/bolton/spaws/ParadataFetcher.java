@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import com.navnorth.learningregistry.LRImporter;
 import com.navnorth.learningregistry.LRResult;
 
+import uk.ac.bolton.spaws.model.INode;
 import uk.ac.bolton.spaws.model.ISubmission;
 import uk.ac.bolton.spaws.model.util.SubmissionFactory;
 
@@ -39,14 +40,9 @@ public class ParadataFetcher {
 	private String widgetIdentifier;
 	
 	/*
-	 * The LR Node we pull from
+	 * The Node we pull data from
 	 */
-    private String nodeDomain;	
-    
-    /*
-     * The protocol, e.g. "https"
-     */
-    private String nodeProtocol;
+	private INode node;
 	
     /**
      * Construct a new ParadataFetcher
@@ -54,9 +50,8 @@ public class ParadataFetcher {
      * @param host the node host, e.g. "my.node.edu"
      * @param identifier the resource identifier, e.g. "http://wookie.apache.org/widgets/youtube"
      */
-	public ParadataFetcher(String protocol, String host, String identifier){
-		this.nodeProtocol = protocol;
-		this.nodeDomain = host;
+	public ParadataFetcher(INode node, String identifier){
+		this.node = node;
 		this.widgetIdentifier = identifier;
 	}
 	
@@ -69,7 +64,7 @@ public class ParadataFetcher {
 		
 		List<ISubmission> submissions = new ArrayList<ISubmission>();
 		
-		LRImporter importer = new LRImporter(nodeDomain, nodeProtocol);
+		LRImporter importer = new LRImporter(node.getHost(), node.getScheme());
 		
 		submissions = getMoreSubmissions(importer, submissions, null);
 		

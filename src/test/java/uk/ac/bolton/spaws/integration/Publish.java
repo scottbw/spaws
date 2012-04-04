@@ -17,55 +17,42 @@ package uk.ac.bolton.spaws.integration;
 
 import static org.junit.Assert.assertEquals;
 
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import uk.ac.bolton.spaws.ParadataFetcher;
-import uk.ac.bolton.spaws.ParadataPublisher;
+import uk.ac.bolton.spaws.ParadataManager;
+import uk.ac.bolton.spaws.model.INode;
 import uk.ac.bolton.spaws.model.ISubmission;
 import uk.ac.bolton.spaws.model.ISubmitter;
 import uk.ac.bolton.spaws.model.impl.Actor;
+import uk.ac.bolton.spaws.model.impl.Node;
 import uk.ac.bolton.spaws.model.impl.Rating;
 import uk.ac.bolton.spaws.model.impl.Submission;
 import uk.ac.bolton.spaws.model.impl.Submitter;
-import uk.ac.bolton.spaws.model.util.RatingSubmissionsFilter;
-import uk.ac.bolton.spaws.model.util.SubmitterSubmissionsFilter;
-
-import com.navnorth.learningregistry.LRException;
 
 public class Publish {
 	
-	private static final String MIMAS_TEST_NODE_URL = "alpha.mimas.ac.uk";
+	private static final String MIMAS_TEST_NODE_URL = "http://alpha.mimas.ac.uk";
 	private static final String WIDGET_URI = "http://wookie.apache.org/widgets/youtube";
-	
-	private static ParadataPublisher publisher;
-	
+	private static INode node;
+		
 	@BeforeClass
-	public static void setup() throws LRException, InterruptedException{
-		publisher = new ParadataPublisher(MIMAS_TEST_NODE_URL);
-		publisher.setUsername("fred");
-		publisher.setPassword("flintstone");
+	public static void setup() throws Exception{
+		
+		node = new Node(new URL(MIMAS_TEST_NODE_URL), "fred", "flintstone");
+	
+		ParadataManager manager = new ParadataManager(new Submitter(), node);
 
-		Rating rating;
-		Actor actor;
-		ISubmission submission;
+		List<ISubmission> submissions = new ArrayList<ISubmission>();
+		submissions.add(new Submission(new Actor("Bill"), new Rating(1), WIDGET_URI));
+		submissions.add(new Submission(new Actor("Amy"), new Rating(1), WIDGET_URI));
+		submissions.add(new Submission(new Actor("Chloe"), new Rating(1), WIDGET_URI));
 		
-		rating = new Rating(1);
-		actor = new Actor("Bill");
-		submission = new Submission(actor, rating, WIDGET_URI);
-		publisher.publish(submission);
-		
-		rating = new Rating(1);
-		actor = new Actor("Amy");
-		submission = new Submission(actor, rating, WIDGET_URI);
-		publisher.publish(submission);
-		
-		rating = new Rating(1);
-		actor = new Actor("Chloe");
-		submission = new Submission(actor, rating, WIDGET_URI);
-		publisher.publish(submission);
+		manager.publishSubmissions(submissions);
 		
 		Thread.sleep(2000);
 	}
@@ -73,29 +60,19 @@ public class Publish {
 	@Test
 	public void UpdateRatings() throws Exception{
 		
-		Rating rating;
-		Actor actor;
-		ISubmission submission;
+		ParadataManager manager = new ParadataManager(new Submitter(), node);
+
+		List<ISubmission> submissions = new ArrayList<ISubmission>();
+		submissions.add(new Submission(new Actor("Bill"), new Rating(5), WIDGET_URI));
+		submissions.add(new Submission(new Actor("Amy"), new Rating(5), WIDGET_URI));
+		submissions.add(new Submission(new Actor("Chloe"), new Rating(5), WIDGET_URI));
 		
-		rating = new Rating(5);
-		actor = new Actor("Bill");
-		submission = new Submission(actor, rating, WIDGET_URI);
-		publisher.publish(submission);
-		
-		rating = new Rating(5);
-		actor = new Actor("Amy");
-		submission = new Submission(actor, rating, WIDGET_URI);
-		publisher.publish(submission);
-		
-		rating = new Rating(5);
-		actor = new Actor("Chloe");
-		submission = new Submission(actor, rating, WIDGET_URI);
-		publisher.publish(submission);
+		manager.publishSubmissions(submissions);
 		
 		Thread.sleep(20000);
 		
-		ParadataFetcher fetcher = new ParadataFetcher("http", MIMAS_TEST_NODE_URL, WIDGET_URI);
-		List<ISubmission> submissions = new RatingSubmissionsFilter().filter(fetcher.getSubmissions());
+		submissions = manager.getMyRatingSubmissions(WIDGET_URI);
+		
 		System.out.println("\nRESULTS");		
 		for (int i=0;i<submissions.size();i++){
 
@@ -115,8 +92,10 @@ public class Publish {
 		submitter.setSubmitter("SPAWS-TEST");
 		submitter.setSubmitterType("agent");
 		
-		ParadataFetcher fetcher = new ParadataFetcher("http", MIMAS_TEST_NODE_URL, WIDGET_URI);
-		List<ISubmission> submissions = new SubmitterSubmissionsFilter().omit(new RatingSubmissionsFilter().filter(fetcher.getSubmissions()), submitter);
+		ParadataManager manager = new ParadataManager(submitter, node);
+		
+		List<ISubmission> submissions = manager.getExternalRatingSubmissions(WIDGET_URI);
+
 		assertEquals(0, submissions.size());
 	}
 	
@@ -126,8 +105,9 @@ public class Publish {
 		submitter.setSubmitter("NOBODY");
 		submitter.setSubmitterType("agent");
 		
-		ParadataFetcher fetcher = new ParadataFetcher("http", MIMAS_TEST_NODE_URL, WIDGET_URI);
-		List<ISubmission> submissions = new SubmitterSubmissionsFilter().omit(new RatingSubmissionsFilter().filter(fetcher.getSubmissions()), submitter);
+		ParadataManager manager = new ParadataManager(submitter, node);
+		List<ISubmission> submissions = manager.getExternalRatingSubmissions(WIDGET_URI);
+		
 		assertEquals(3, submissions.size());
 	}
 }
