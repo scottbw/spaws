@@ -24,11 +24,12 @@ import org.junit.Test;
 
 import uk.ac.bolton.spaws.ParadataFetcher;
 import uk.ac.bolton.spaws.ParadataPublisher;
-import uk.ac.bolton.spaws.Submitter;
 import uk.ac.bolton.spaws.model.ISubmission;
+import uk.ac.bolton.spaws.model.ISubmitter;
 import uk.ac.bolton.spaws.model.impl.Actor;
 import uk.ac.bolton.spaws.model.impl.Rating;
 import uk.ac.bolton.spaws.model.impl.Submission;
+import uk.ac.bolton.spaws.model.impl.Submitter;
 import uk.ac.bolton.spaws.model.util.RatingSubmissionsFilter;
 import uk.ac.bolton.spaws.model.util.SubmitterSubmissionsFilter;
 
@@ -110,7 +111,7 @@ public class Publish {
 	
 	@Test
 	public void filterBySubmitter() throws Exception{
-		Submitter submitter = new Submitter();
+		ISubmitter submitter = new Submitter();
 		submitter.setSubmitter("SPAWS-TEST");
 		submitter.setSubmitterType("agent");
 		
@@ -121,7 +122,7 @@ public class Publish {
 	
 	@Test
 	public void filterBySubmitter2() throws Exception{
-		Submitter submitter = new Submitter();
+		ISubmitter submitter = new Submitter();
 		submitter.setSubmitter("NOBODY");
 		submitter.setSubmitterType("agent");
 		
