@@ -15,10 +15,7 @@
  */
 package uk.ac.bolton.spaws;
 
-import java.net.URL;
 import java.util.List;
-
-import com.navnorth.learningregistry.LRException;
 
 import uk.ac.bolton.spaws.filter.RatingSubmissionsFilter;
 import uk.ac.bolton.spaws.filter.SubmitterSubmissionsFilter;
@@ -31,11 +28,30 @@ public class ParadataManager {
 	private ISubmitter submitter;
 	private INode node;
 
-	public ParadataManager(ISubmitter submitter , INode node){
+	public ParadataManager(ISubmitter submitter , INode node) throws Exception{
+		
+		if (submitter == null){
+			throw new Exception("No submitter provided");
+		}
+		if (node == null){
+			throw new Exception("No node provided");
+		}
+		
 		this.submitter = submitter;
 		this.node = node;
 	}
 
+	/**
+	 * Return all paradata for a resource of all types from all submitters for the resource
+	 * @param resourceUrl
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ISubmission> getSubmissions(String resourceUrl) throws Exception{
+		ParadataFetcher fetcher = new ParadataFetcher(node, resourceUrl);
+		return fetcher.getSubmissions();
+	}
+	
 	/**
 	 * Return all paradata for a resource of all types from other submitters for the resource
 	 * @param resourceUrl
