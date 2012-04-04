@@ -22,6 +22,9 @@ import java.util.List;
 
 import uk.ac.bolton.spaws.model.ISubmission;
 
+/**
+ * Filter for normalizing a set of Rating submissions
+ */
 public class RatingSubmissionsFilter {
 	
 	/**
