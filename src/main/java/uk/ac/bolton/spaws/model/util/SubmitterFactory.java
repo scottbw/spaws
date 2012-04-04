@@ -18,12 +18,13 @@ package uk.ac.bolton.spaws.model.util;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import uk.ac.bolton.spaws.Submitter;
+import uk.ac.bolton.spaws.model.ISubmitter;
+import uk.ac.bolton.spaws.model.impl.Submitter;
 
 public class SubmitterFactory {
 	
-	public static Submitter createSubmitter(JSONObject object) throws JSONException{
-		Submitter submitter = new Submitter();
+	public static ISubmitter createSubmitter(JSONObject object) throws JSONException{
+		ISubmitter submitter = new Submitter();
 		if (object.has("identity")){
 			submitter.setSigner(object.getJSONObject("identity").getString("signer"));
 			submitter.setSubmitter(object.getJSONObject("identity").getString("submitter"));

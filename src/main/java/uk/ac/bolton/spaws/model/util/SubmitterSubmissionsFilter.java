@@ -18,8 +18,8 @@ package uk.ac.bolton.spaws.model.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.ac.bolton.spaws.Submitter;
 import uk.ac.bolton.spaws.model.ISubmission;
+import uk.ac.bolton.spaws.model.ISubmitter;
 
 /**
  * Filters for submissions based on submitter information
@@ -32,7 +32,7 @@ public class SubmitterSubmissionsFilter {
 	 * @param submitter the submitter whose submissions should be omitted from the results
 	 * @return the filtered list of submissions
 	 */
-	public List<ISubmission> omit(List<ISubmission> submissions, Submitter submitter){
+	public List<ISubmission> omit(List<ISubmission> submissions, ISubmitter submitter){
 		
 		ArrayList<ISubmission> filteredSubmissions = new ArrayList<ISubmission>();
 		
