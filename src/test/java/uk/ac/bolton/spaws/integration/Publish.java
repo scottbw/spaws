@@ -54,9 +54,9 @@ public class Publish {
 		
 		manager.publishSubmissions(submissions);
 		
-		Thread.sleep(2000);
+		Thread.sleep(20000);
 	}
-
+	
 	@Test
 	public void UpdateRatings() throws Exception{
 		
@@ -77,7 +77,7 @@ public class Publish {
 		for (int i=0;i<submissions.size();i++){
 
 			ISubmission s = submissions.get(i);
-			System.out.println("Rating: "+s.getRating().getRating() + " From: " + s.getActor().getName() + " Date:"+s.getUpdated().toGMTString());			
+			System.out.println("Rating: "+s.getRating().getRating() + " From: " + s.getActor().getName() + " Date:"+s.getUpdated().toString());			
 		}
 		
 		assertEquals(5, submissions.get(0).getRating().getRating());
