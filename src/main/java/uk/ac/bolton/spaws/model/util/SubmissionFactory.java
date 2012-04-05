@@ -48,10 +48,19 @@ public class SubmissionFactory {
 		submission.setActor(actor);
 		
 		//
-		// Set the updated date
+		// Get the updated date
 		//
 		String updated = object.getString("update_timestamp");
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.'SSSSSS'Z'");
+		
+		//
+		// We have to strip off the microseconds as we can't use those
+		//
+		updated = updated.substring(0, updated.length()-4)+"Z";
+		
+		//
+		// Parse the date
+		//
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.'SSS'Z'");
 		df.setTimeZone(TimeZone.getTimeZone("UTC"));
 		Date date = df.parse(updated);
 		submission.setUpdated(date);
