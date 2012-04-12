@@ -22,22 +22,15 @@ import uk.ac.bolton.spaws.model.IRating;
 public class Rating implements IRating {
 	
 	public Rating(int rating){
-		this.sample = 1;
-		this.min = 0;
-		this.max = 5;
 		this.rating = rating;		
 	}
 	
-	private int rating;
-	private int min;
-	private int max;
-	private int sample;
+	private int rating = 0;
+	private int min = 0;
+	private int max = 5;
+	private int sample = 1;
 	
 	public Rating(){
-		this.sample = 1;
-		this.min = 0;
-		this.max = 5;
-		this.rating = 0;
 	}
 
 	public int getRating() {
@@ -85,5 +78,14 @@ public class Rating implements IRating {
 	public void addMeasure(LRActivity activity) {
 		activity.addMeasureToVerb("rated", getRating(), getMin(), getMax(), getSample());
 	}
+
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.IParadata#getContent()
+	 */
+	public String getContent() {
+		return null;
+	}
+	
+	
 
 }
