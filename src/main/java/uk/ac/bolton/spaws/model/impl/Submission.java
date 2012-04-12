@@ -27,20 +27,6 @@ import uk.ac.bolton.spaws.model.ISubmitter;
 
 public class Submission implements ISubmission {
 
-	/**
-	 * @return the submitted
-	 */
-	public Date getUpdated() {
-		return updated;
-	}
-
-	/**
-	 * @param submitted the submitted to set
-	 */
-	public void setUpdated(Date submitted) {
-		this.updated = submitted;
-	}
-
 	private ISubmitter submitter;
 	private String resourceURL;
 	private IParadata action;
@@ -48,7 +34,6 @@ public class Submission implements ISubmission {
 	private Date updated;
 	
 	public Submission(){
-		
 	}
 	
 	public Submission(Actor actor, Rating rating, String resourceUrl){
@@ -72,14 +57,15 @@ public class Submission implements ISubmission {
 		setSubmitter(submitter);
 		setUpdated(updated);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see uk.ac.bolton.spaws.model.impl.ISubmission#getActivity()
 	 */
 	public LRActivity getActivity(){
 		LRActivity activity = new LRActivity(getResourceURL(), getSubmitter().getSubmitter(), getSubmitter().getSubmitterType(), getSubmitter().getSubmissionTOS(), getSubmitter().getSubmissionAttribution(), getSubmitter().getSigner());
-		activity.addActor("actor", getActor().getName(), null, null);
+		activity.addActor("actor", getActor().getName(), getActor().getUrl(), null);
 		activity.addVerb(getAction().getVerb(), null, null, null, null);
+		activity.addContent(getAction().getContent());
 		getAction().addMeasure(activity);
 		activity.addObject(null, null, getResourceURL());
 		return activity;
@@ -142,6 +128,19 @@ public class Submission implements ISubmission {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.ISubmission#getUpdated()
+	 */
+	public Date getUpdated() {
+		return updated;
+	}
+
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.ISubmission#setUpdated(java.util.Date)
+	 */
+	public void setUpdated(Date submitted) {
+		this.updated = submitted;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
