@@ -25,12 +25,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import uk.ac.bolton.spaws.ParadataManager;
+import uk.ac.bolton.spaws.filter.NormalizingFilter;
 import uk.ac.bolton.spaws.model.INode;
+import uk.ac.bolton.spaws.model.IRating;
+import uk.ac.bolton.spaws.model.IReview;
 import uk.ac.bolton.spaws.model.ISubmission;
 import uk.ac.bolton.spaws.model.ISubmitter;
 import uk.ac.bolton.spaws.model.impl.Actor;
 import uk.ac.bolton.spaws.model.impl.Node;
 import uk.ac.bolton.spaws.model.impl.Rating;
+import uk.ac.bolton.spaws.model.impl.Review;
 import uk.ac.bolton.spaws.model.impl.Submission;
 import uk.ac.bolton.spaws.model.impl.Submitter;
 
@@ -51,6 +55,8 @@ public class Publish {
 		submissions.add(new Submission(new Actor("Bill"), new Rating(1), WIDGET_URI));
 		submissions.add(new Submission(new Actor("Amy"), new Rating(1), WIDGET_URI));
 		submissions.add(new Submission(new Actor("Chloe"), new Rating(1), WIDGET_URI));
+		
+		submissions.add(new Submission(new Actor("Dave"), new Review("Great", 4), WIDGET_URI));
 		
 		manager.publishSubmissions(submissions);
 		
@@ -109,5 +115,16 @@ public class Publish {
 		List<ISubmission> submissions = manager.getExternalRatingSubmissions(WIDGET_URI);
 		
 		assertEquals(3, submissions.size());
+	}
+	
+	@Test
+	public void filterReviews() throws Exception{
+		ParadataManager manager = new ParadataManager(new Submitter(), node);
+		List<ISubmission> submissions = manager.getSubmissions(WIDGET_URI);
+		submissions = new NormalizingFilter(IReview.VERB).filter(submissions);
+		assertEquals(1, submissions.size());
+		assertEquals("Dave", submissions.get(0).getActor().getName());
+		assertEquals("Great", submissions.get(0).getAction().getContent());
+		assertEquals(4, ((IRating)submissions.get(0).getAction()).getRating());
 	}
 }
