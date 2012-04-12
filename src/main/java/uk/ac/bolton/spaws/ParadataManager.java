@@ -17,9 +17,10 @@ package uk.ac.bolton.spaws;
 
 import java.util.List;
 
-import uk.ac.bolton.spaws.filter.RatingSubmissionsFilter;
+import uk.ac.bolton.spaws.filter.NormalizingFilter;
 import uk.ac.bolton.spaws.filter.SubmitterSubmissionsFilter;
 import uk.ac.bolton.spaws.model.INode;
+import uk.ac.bolton.spaws.model.IRating;
 import uk.ac.bolton.spaws.model.ISubmission;
 import uk.ac.bolton.spaws.model.ISubmitter;
 
@@ -71,7 +72,7 @@ public class ParadataManager {
 	 */
 	public List<ISubmission> getExternalRatingSubmissions(String resourceUrl) throws Exception{
 		ParadataFetcher fetcher = new ParadataFetcher(node, resourceUrl);
-		return new SubmitterSubmissionsFilter().omit(new RatingSubmissionsFilter().filter(fetcher.getSubmissions()), submitter);
+		return new SubmitterSubmissionsFilter().omit(new NormalizingFilter(IRating.VERB).filter(fetcher.getSubmissions()), submitter);
 	}
 	
 	/**
@@ -93,7 +94,7 @@ public class ParadataManager {
 	 */
 	public List<ISubmission> getRatingSubmissionsForSubmitter(ISubmitter submitter, String resourceUrl) throws Exception{
 		ParadataFetcher fetcher = new ParadataFetcher(node, resourceUrl);
-		return new SubmitterSubmissionsFilter().include(new RatingSubmissionsFilter().filter(fetcher.getSubmissions()), submitter);
+		return new SubmitterSubmissionsFilter().include(new NormalizingFilter(IRating.VERB).filter(fetcher.getSubmissions()), submitter);
 	}
 	
 	/**
