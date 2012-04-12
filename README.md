@@ -7,7 +7,7 @@ There is some more info here:
 http://scottbw.wordpress.com/tag/oerri/
 
 ## How to use it
-The main entry point to SPAWS is the ParadataManager class. Instances of this class can publish and retrieve paradato from a Learning Registry Node.
+The main entry point to SPAWS is the ParadataManager class. Instances of this class can publish and retrieve paradata from a Learning Registry Node.
 
 For example:
 
@@ -24,3 +24,6 @@ List<ISubmission> submissions = manager.getExternalRatingSubmissions("http://my.
 
 ```
 
+## Including the library in a project
+
+Snapshots are available from the Sonatype snapshots repository; releases will eventually be available from maven central.
