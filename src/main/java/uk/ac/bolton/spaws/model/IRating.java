@@ -17,6 +17,8 @@ package uk.ac.bolton.spaws.model;
 
 public interface IRating extends IParadata {
 	
+	public static String VERB = "rated";
+	
 	public abstract int getRating();
 	public abstract void setRating(int rating);
 	
