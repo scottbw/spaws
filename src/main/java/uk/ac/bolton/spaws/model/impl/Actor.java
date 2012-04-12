@@ -19,22 +19,44 @@ import uk.ac.bolton.spaws.model.IActor;
 
 public class Actor implements IActor {
 	
-	public Actor(){
-		
+	public Actor(){	
 	}
 	
 	public Actor(String name){
 		this.name = name;
-	}
+	}	
 	
 	private String name;
+	private String url;
+	
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.IActor#getUrl()
+	 */
+	public String getUrl() {
+		return url;
+	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.IActor#setUrl(java.lang.String)
+	 */
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.IActor#getName()
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.IActor#setName(java.lang.String)
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
 
 }

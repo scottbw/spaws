@@ -19,5 +19,8 @@ public interface IActor {
 	
 	public abstract String getName();
 	public abstract void setName(String name);
+	
+	public abstract String getUrl();
+	public void setUrl(String url);
 
 }
