@@ -24,7 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import uk.ac.bolton.spaws.model.IActor;
-import uk.ac.bolton.spaws.model.IRating;
+import uk.ac.bolton.spaws.model.IParadata;
 import uk.ac.bolton.spaws.model.ISubmitter;
 import uk.ac.bolton.spaws.model.impl.Submission;
 
@@ -38,8 +38,8 @@ public class SubmissionFactory {
 		//
 		// Set the action 
 		//
-		IRating rating = RatingFactory.createRating(object);
-		submission.setAction(rating);
+		IParadata action = ActionFactory.parse(object);
+		submission.setAction(action);
 		
 		//
 		// Set the actor
