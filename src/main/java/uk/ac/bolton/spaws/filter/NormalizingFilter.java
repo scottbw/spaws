@@ -1,18 +1,3 @@
-/*
- *  (c) 2012 University of Bolton
- *  
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package uk.ac.bolton.spaws.filter;
 
 import java.util.ArrayList;
@@ -23,12 +8,21 @@ import java.util.List;
 import uk.ac.bolton.spaws.model.ISubmission;
 
 /**
- * Filter for normalizing a set of Rating submissions
+ * Abstract base class for a filter for normalizing a set of submissions
  */
-public class RatingSubmissionsFilter {
+public class NormalizingFilter{
 	
 	/**
-	 * Given a list of submissions, return only the Rating submissions that
+	 * The verb to filter
+	 */
+	private String verb;
+	
+	public NormalizingFilter(String verb){
+		this.verb = verb;
+	}
+	
+	/**
+	 * Given a list of submissions, return only the submissions that
 	 * are unique for a given set of resources and actors, taking the most recent
 	 * as being the definitive.
 	 * @param submissions
@@ -56,7 +50,7 @@ public class RatingSubmissionsFilter {
 		// Iterate and add 
 		//
 		for (ISubmission submission:sortedSubmissions){
-			if (submission.getAction().getVerb().equals("rated")){
+			if (submission.getAction().getVerb().equals(verb)){
 				if (!filteredSubmissions.contains(submission)){
 					filteredSubmissions.add(submission);
 				}
@@ -79,5 +73,6 @@ public class RatingSubmissionsFilter {
 	        return o2.getUpdated().compareTo(o1.getUpdated());
 		}
 	}
+
 
 }

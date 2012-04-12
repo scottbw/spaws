@@ -23,16 +23,19 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import uk.ac.bolton.spaws.model.IRating;
+import uk.ac.bolton.spaws.model.IReview;
 import uk.ac.bolton.spaws.model.ISubmission;
 import uk.ac.bolton.spaws.model.impl.Actor;
 import uk.ac.bolton.spaws.model.impl.Rating;
+import uk.ac.bolton.spaws.model.impl.Review;
 import uk.ac.bolton.spaws.model.impl.Submission;
 import uk.ac.bolton.spaws.model.impl.Submitter;
 
-public class RatingSubmissionsFilterTest {
+public class NormalizingFilterTest {
 	
 	@Test
-	public void filterDuplicateSubmissions(){
+	public void filterDuplicateRatingSubmissions(){
 		
 		String resourceUrl = "TEST_RESOURCE";
 		
@@ -45,7 +48,7 @@ public class RatingSubmissionsFilterTest {
 		submissions.add(new Submission(new Submitter(), new Actor("Bob"), new Rating(1), resourceUrl, now));	
 		submissions.add(new Submission(new Submitter(), new Actor("Bob"), new Rating(5), resourceUrl, later));	
 		
-		List<ISubmission> results = new RatingSubmissionsFilter().filter(submissions);
+		List<ISubmission> results = new NormalizingFilter(IRating.VERB).filter(submissions);
 		
 		assertEquals(2, results.size());
 		
@@ -62,6 +65,46 @@ public class RatingSubmissionsFilterTest {
 		
 		assertEquals(5, bob.getRating().getRating());
 		assertEquals(3, alice.getRating().getRating());
+	}
+	
+	@Test
+	public void filterTypedSubmissions(){
+		
+		String resourceUrl = "TEST_RESOURCE";
+		
+		List<ISubmission> submissions = new ArrayList<ISubmission>();
+		
+		Date now = new Date();
+		Date later = new Date(now.getTime()+100);
+		
+		submissions.add(new Submission(new Submitter(), new Actor("Alice"), new Rating(3), resourceUrl, now));
+		submissions.add(new Submission(new Submitter(), new Actor("Bob"), new Rating(1), resourceUrl, now));	
+		submissions.add(new Submission(new Submitter(), new Actor("Chloe"), new Rating(5), resourceUrl, later));	
+		
+		List<ISubmission> results = new NormalizingFilter(IReview.VERB).filter(submissions);
+		
+		assertEquals(0, results.size());
+	}
+	
+	@Test
+	public void filterTypedSubmissions2(){
+		
+		String resourceUrl = "TEST_RESOURCE";
+		
+		List<ISubmission> submissions = new ArrayList<ISubmission>();
+		
+		Date now = new Date();
+		Date later = new Date(now.getTime()+100);
+		
+		submissions.add(new Submission(new Submitter(), new Actor("Alice"), new Rating(3), resourceUrl, now));
+		submissions.add(new Submission(new Submitter(), new Actor("Bob"), new Rating(1), resourceUrl, now));	
+		submissions.add(new Submission(new Submitter(), new Actor("Chloe"), new Review("Great",5), resourceUrl, later));	
+		
+		List<ISubmission> results = new NormalizingFilter(IReview.VERB).filter(submissions);
+		
+		assertEquals(1, results.size());
+		assertEquals("Chloe", results.get(0).getActor().getName());
+		assertEquals("Great", results.get(0).getAction().getContent());
 	}
 
 }
