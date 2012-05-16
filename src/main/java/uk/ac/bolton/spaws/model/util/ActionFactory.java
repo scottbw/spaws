@@ -20,8 +20,10 @@ import org.json.JSONObject;
 
 import uk.ac.bolton.spaws.model.IParadata;
 import uk.ac.bolton.spaws.model.IRating;
+import uk.ac.bolton.spaws.model.IRatings;
 import uk.ac.bolton.spaws.model.IReview;
 import uk.ac.bolton.spaws.model.impl.Rating;
+import uk.ac.bolton.spaws.model.impl.Ratings;
 import uk.ac.bolton.spaws.model.impl.Review;
 
 public class ActionFactory {
@@ -46,13 +48,21 @@ public class ActionFactory {
 				else if (verb.equals(IReview.VERB)){
 					return createReviewFromActivity(activity);								
 				}
+				else if (verb.equals(IRatings.VERB)){
+					return createRatingsFromActivity(activity);								
+				}
 			}
 		}
 		
 		return null;
 	}
 
-	
+	/**
+	 * Create a rating object
+	 * @param verb
+	 * @return
+	 * @throws JSONException
+	 */
 	private static IRating createRatingFromActivity(JSONObject verb) throws JSONException{
 		Rating rating = new Rating();
 		
@@ -66,6 +76,31 @@ public class ActionFactory {
 		return rating;
 	}
 	
+	/**
+	 * Create a composite ratings object
+	 * @param verb
+	 * @return
+	 * @throws JSONException
+	 */
+	private static IRatings createRatingsFromActivity(JSONObject verb) throws JSONException{
+		Ratings ratings = new Ratings();
+		
+		JSONObject measure = verb.getJSONObject("measure");
+		if (measure == null) return null;
+		ratings.setMin(measure.getInt("scaleMin"));
+		ratings.setMax(measure.getInt("scaleMax"));
+		ratings.setAverage(measure.getDouble("value"));
+		ratings.setSample(measure.getInt("sampleSize"));
+		
+		return ratings;
+	}
+	
+	/**
+	 * Create a review object
+	 * @param activity
+	 * @return
+	 * @throws JSONException
+	 */
 	private static IReview createReviewFromActivity(JSONObject activity) throws JSONException{
 		Review review = new Review();
 		
