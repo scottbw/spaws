@@ -8,9 +8,8 @@ Note as ratings are composite, there is no actor component.
 
 ## Example:
 
-   {
-    "activity": {
-        
+    {
+     "activity": {    
         "verb": {
             "action": "allrated",
             "measure": {
@@ -24,11 +23,11 @@ Note as ratings are composite, there is no actor component.
         "object": {
             "id": "http://widgets.opera.com/bubbles"
         } 
-    },
+     },
     
-    "identity":{
+     "identity":{
         signer: "My Store",
         submitter: "My Store",
         submitter_type: "agent"
+     }
     }
-   }
