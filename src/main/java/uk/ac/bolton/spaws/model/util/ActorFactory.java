@@ -30,6 +30,7 @@ public class ActorFactory {
 				if (activity.has("actor")){
 					Actor actor = new Actor();
 					actor.setName(activity.getJSONObject("actor").getString("displayName"));
+					actor.setUrl(activity.getJSONObject("actor").getString("url"));
 					return actor;
 				}
 			}
