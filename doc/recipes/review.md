@@ -4,8 +4,8 @@ A review record contains a review comment and (optionally) a rating in the same 
 
 ##Example:
 
-   {
-    "activity": {
+    {
+     "activity": {
         "actor": {
             "displayName": "John Smith",
             "url": "http://my-store.com/profiles/234"
@@ -27,11 +27,11 @@ A review record contains a review comment and (optionally) a rating in the same 
         "object": {
             "id": "http://widgets.opera.com/bubbles"
         } 
-    },
+     },
     
-    "identity":{
+     "identity":{
         signer: "My Store",
         submitter: "My Store",
         submitter_type: "agent"
+     }
     }
-   }

@@ -4,8 +4,8 @@ A rating record contains a rating from 0 to 5 but no other comments.
 
 ##Example:
 
-   {
-    "activity": {
+    {
+     "activity": {
         "actor": {
             "displayName": "John Smith",
             "url": "http://my-store.com/profiles/234"
@@ -25,11 +25,11 @@ A rating record contains a rating from 0 to 5 but no other comments.
         "object": {
             "id": "http://widgets.opera.com/bubbles"
         } 
-    },
+     },
     
-    "identity":{
+     "identity":{
         signer: "My Store",
         submitter: "My Store",
         submitter_type: "agent"
+     }
     }
-   }
