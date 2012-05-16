@@ -76,7 +76,7 @@ public class Rating implements IRating {
 	 * @see uk.ac.bolton.spaws.model.IParadata#addMeasure(com.navnorth.learningregistry.LRActivity)
 	 */
 	public void addMeasure(LRActivity activity) {
-		activity.addMeasureToVerb("rated", getRating(), getMin(), getMax(), getSample());
+		activity.addMeasureToVerb(VERB, getRating(), getMin(), getMax(), getSample());
 	}
 
 	/* (non-Javadoc)
