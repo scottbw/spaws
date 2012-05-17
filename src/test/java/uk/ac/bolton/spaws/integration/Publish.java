@@ -66,7 +66,8 @@ public class Publish {
 	@Test
 	public void UpdateRatings() throws Exception{
 		
-		ParadataManager manager = new ParadataManager(new Submitter(), node);
+		Submitter submitter = new Submitter();
+		ParadataManager manager = new ParadataManager(submitter, node);
 
 		List<ISubmission> submissions = new ArrayList<ISubmission>();
 		submissions.add(new Submission(new Actor("Bill"), new Rating(5), WIDGET_URI));
@@ -77,7 +78,7 @@ public class Publish {
 		
 		Thread.sleep(20000);
 		
-		submissions = manager.getMyRatingSubmissions(WIDGET_URI);
+		submissions = manager.getSubmissionsForSubmitter(submitter, WIDGET_URI, IRating.VERB);
 		
 		System.out.println("\nRESULTS");		
 		for (int i=0;i<submissions.size();i++){
