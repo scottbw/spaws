@@ -26,10 +26,6 @@ public interface IRating extends IParadata {
 	public abstract void setMin(int min);
 	
 	public abstract int getMax();
-	public abstract void setMax(int max);
-	
-	public abstract int getSample();
-	public abstract void setSample(int sample);
-	
+	public abstract void setMax(int max);	
 
 }

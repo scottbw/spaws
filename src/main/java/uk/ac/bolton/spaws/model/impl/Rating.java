@@ -28,7 +28,6 @@ public class Rating implements IRating {
 	private int rating = 0;
 	private int min = 0;
 	private int max = 5;
-	private int sample = 1;
 	
 	public Rating(){
 	}
@@ -57,14 +56,6 @@ public class Rating implements IRating {
 		this.max = max;
 	}
 
-	public int getSample() {
-		return sample;
-	}
-
-	public void setSample(int sample) {
-		this.sample = sample;
-	}
-
 	/* (non-Javadoc)
 	 * @see uk.ac.bolton.spaws.model.IParadata#getVerb()
 	 */
@@ -76,7 +67,7 @@ public class Rating implements IRating {
 	 * @see uk.ac.bolton.spaws.model.IParadata#addMeasure(com.navnorth.learningregistry.LRActivity)
 	 */
 	public void addMeasure(LRActivity activity) {
-		activity.addMeasureToVerb(VERB, getRating(), getMin(), getMax(), getSample());
+		activity.addMeasureToVerb(VERB, getRating(), getMin(), getMax(), 1);
 	}
 
 	/* (non-Javadoc)

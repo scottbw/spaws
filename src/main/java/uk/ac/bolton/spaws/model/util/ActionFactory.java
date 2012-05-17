@@ -71,7 +71,6 @@ public class ActionFactory {
 		rating.setMin(measure.getInt("scaleMin"));
 		rating.setMax(measure.getInt("scaleMax"));
 		rating.setRating(measure.getInt("value"));
-		rating.setSample(measure.getInt("sampleSize"));
 		
 		return rating;
 	}
@@ -113,7 +112,6 @@ public class ActionFactory {
 			review.setMin(measure.getInt("scaleMin"));
 			review.setMax(measure.getInt("scaleMax"));
 			review.setRating(measure.getInt("value"));
-			review.setSample(measure.getInt("sampleSize"));
 		}
 		
 		return review;
