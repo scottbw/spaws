@@ -60,7 +60,7 @@ public class Rating implements IRating {
 	 * @see uk.ac.bolton.spaws.model.IParadata#getVerb()
 	 */
 	public String getVerb() {
-		return "rated";
+		return VERB;
 	}
 
 	/* (non-Javadoc)
