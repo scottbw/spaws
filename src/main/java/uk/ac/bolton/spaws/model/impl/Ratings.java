@@ -24,7 +24,7 @@ public class Ratings implements IRatings {
 	private double average = 0.0;
 	private int min = 0;
 	private int max = 5;
-	private int sample = 1;
+	private int sample = 0;
 
 	public String getVerb() {
 		return VERB;
