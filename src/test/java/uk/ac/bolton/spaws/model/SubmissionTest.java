@@ -104,6 +104,7 @@ public class SubmissionTest {
 		Submission submission = new Submission(submitter, actor, rating, resourceUrl, date);
 		
 		LRActivity activity = submission.getActivity();
+		@SuppressWarnings("rawtypes")
 		Map map = (Map) ((Map) ((Map) ((Map) activity.getResourceData()).get("activity")).get("verb")).get("measure");
 		assertEquals(1, map.get("sampleSize"));
 		assertEquals(0, map.get("scaleMin"));
