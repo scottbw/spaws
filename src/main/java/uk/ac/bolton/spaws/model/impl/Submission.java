@@ -21,7 +21,6 @@ import com.navnorth.learningregistry.LRActivity;
 
 import uk.ac.bolton.spaws.model.IActor;
 import uk.ac.bolton.spaws.model.IParadata;
-import uk.ac.bolton.spaws.model.IRating;
 import uk.ac.bolton.spaws.model.ISubmission;
 import uk.ac.bolton.spaws.model.ISubmitter;
 
@@ -114,18 +113,6 @@ public class Submission implements ISubmission {
 
 	public ISubmitter getSubmitter() {
 		return submitter;
-	}
-	
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.ISubmission#getRating()
-	 */
-	public IRating getRating() {
-		try {
-			IRating rating = (IRating)getAction();
-			return rating;
-		} catch (Exception e) {
-			return null;
-		}
 	}
 	
 	/* (non-Javadoc)

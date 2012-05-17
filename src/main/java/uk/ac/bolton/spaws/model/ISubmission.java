@@ -68,12 +68,6 @@ public interface ISubmission {
 	public abstract void setResourceURL(String resourceURL);
 	
 	/**
-	 * Get the rating of the submission, if this is a valid type
-	 * @return
-	 */
-	public abstract IRating getRating();
-	
-	/**
 	 * Get the date the submission was published
 	 * @return
 	 */

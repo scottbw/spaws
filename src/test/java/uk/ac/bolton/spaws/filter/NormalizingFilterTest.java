@@ -63,8 +63,11 @@ public class NormalizingFilterTest {
 			}
 		}
 		
-		assertEquals(5, bob.getRating().getRating());
-		assertEquals(3, alice.getRating().getRating());
+		IRating bobRating = (IRating)bob.getAction();
+		IRating aliceRating = (IRating)alice.getAction();
+		
+		assertEquals(5, bobRating.getRating());
+		assertEquals(3, aliceRating.getRating());
 	}
 	
 	@Test

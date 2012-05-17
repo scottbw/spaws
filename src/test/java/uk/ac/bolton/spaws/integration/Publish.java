@@ -83,12 +83,12 @@ public class Publish {
 		for (int i=0;i<submissions.size();i++){
 
 			ISubmission s = submissions.get(i);
-			System.out.println("Rating: "+s.getRating().getRating() + " From: " + s.getActor().getName() + " Date:"+s.getUpdated().toString());			
+			System.out.println("Rating: "+((IRating)s.getAction()).getRating() + " From: " + s.getActor().getName() + " Date:"+s.getUpdated().toString());			
 		}
 		
-		assertEquals(5, submissions.get(0).getRating().getRating());
-		assertEquals(5, submissions.get(1).getRating().getRating());
-		assertEquals(5, submissions.get(2).getRating().getRating());		
+		assertEquals(5, ((IRating)submissions.get(0).getAction()).getRating());
+		assertEquals(5, ((IRating)submissions.get(1).getAction()).getRating());
+		assertEquals(5, ((IRating)submissions.get(2).getAction()).getRating());		
 
 	}
 	
