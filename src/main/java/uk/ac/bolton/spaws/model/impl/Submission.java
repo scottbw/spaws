@@ -42,16 +42,16 @@ public class Submission implements ISubmission {
 		setSubmitter(new Submitter());
 	}
 	
-	public Submission(ISubmitter submitter, Actor actor, Rating rating, String resourceUrl){
+	public Submission(ISubmitter submitter, Actor actor, IParadata action, String resourceUrl){
 		setActor(actor);
-		setAction(rating);
+		setAction(action);
 		setResourceURL(resourceUrl);
 		setSubmitter(submitter);
 	}
 	
-	public Submission(ISubmitter submitter, Actor actor, Rating rating, String resourceUrl, Date updated){
+	public Submission(ISubmitter submitter, Actor actor, IParadata action, String resourceUrl, Date updated){
 		setActor(actor);
-		setAction(rating);
+		setAction(action);
 		setResourceURL(resourceUrl);
 		setSubmitter(submitter);
 		setUpdated(updated);
