@@ -29,10 +29,10 @@ public interface IStats extends IParadata{
 	
 	public abstract int getLikes();
 	
-	public abstract int setLikes(int likes);
+	public abstract void setLikes(int likes);
 	
 	public abstract int getViews();
 	
-	public abstract int setViews(int views);
+	public abstract void setViews(int views);
 
 }
