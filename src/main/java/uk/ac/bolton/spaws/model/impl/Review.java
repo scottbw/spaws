@@ -15,52 +15,47 @@
  */
 package uk.ac.bolton.spaws.model.impl;
 
+import com.navnorth.learningregistry.LRActivity;
+
 import uk.ac.bolton.spaws.model.IReview;
 
 /**
  * Review implementation
  */
-public class Review extends Rating implements IReview {
+public class Review extends Paradata implements IReview {
 	
 	public Review(){
-		
 	}
 	
-	public Review(String comment, int rating){
+	public static final String VERB = "reviewed";
+	
+	public Review(String comment){
 		setComment(comment);
-		setRating(rating);
 	}
-	
-	private String comment;
 
 	/* (non-Javadoc)
 	 * @see uk.ac.bolton.spaws.model.IReview#getComment()
 	 */
 	public String getComment() {
-		return comment;
+		return getContent();
 	}
 
 	/* (non-Javadoc)
 	 * @see uk.ac.bolton.spaws.model.IReview#setComment(java.lang.String)
 	 */
 	public void setComment(String comment) {
-		this.comment = comment;
+		this.setContent(comment);
 	}
 
 	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.Rating#getVerb()
+	 * @see uk.ac.bolton.spaws.model.IParadata#getVerb()
 	 */
-	@Override
 	public String getVerb() {
-		return "reviewed";
+		return VERB;
 	}
 
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.impl.Rating#getContent()
-	 */
-	@Override
-	public String getContent() {
-		return comment;
+	public void addMeasure(LRActivity activity) {
+		// TODO Auto-generated method stub
 	}	
 
 }

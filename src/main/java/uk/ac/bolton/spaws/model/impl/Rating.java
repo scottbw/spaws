@@ -19,7 +19,7 @@ import com.navnorth.learningregistry.LRActivity;
 
 import uk.ac.bolton.spaws.model.IRating;
 
-public class Rating implements IRating {
+public class Rating extends Paradata implements IRating {
 	
 	public Rating(int rating){
 		this.rating = rating;		
@@ -70,12 +70,6 @@ public class Rating implements IRating {
 		activity.addMeasureToVerb(VERB, getRating(), getMin(), getMax(), 1);
 	}
 
-	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.IParadata#getContent()
-	 */
-	public String getContent() {
-		return null;
-	}
 	
 	
 

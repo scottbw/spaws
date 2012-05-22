@@ -35,11 +35,11 @@ public class Submission implements ISubmission {
 	public Submission(){
 	}
 	
-	public Submission(Actor actor, Rating rating, String resourceUrl){
+	public Submission(Actor actor, IParadata action, String resourceUrl){
 		setActor(actor);
-		setAction(rating);
+		setAction(action);
 		setResourceURL(resourceUrl);
-		setSubmitter(new Submitter());
+		setSubmitter(submitter);
 	}
 	
 	public Submission(ISubmitter submitter, Actor actor, IParadata action, String resourceUrl){
@@ -64,6 +64,9 @@ public class Submission implements ISubmission {
 		LRActivity activity = new LRActivity(getResourceURL(), getSubmitter().getSubmitter(), getSubmitter().getSubmitterType(), getSubmitter().getSubmissionTOS(), getSubmitter().getSubmissionAttribution(), getSubmitter().getSigner());
 		activity.addActor("actor", getActor().getName(), getActor().getUrl(), null);
 		activity.addVerb(getAction().getVerb(), null, null, null, null);
+		if (this.action.getContextUrl() != null){
+			activity.addContextToVerb("Widget", this.action.getContextUrl(), "Detail page");
+		}
 		activity.addContent(getAction().getContent());
 		getAction().addMeasure(activity);
 		activity.addObject(null, null, getResourceURL());

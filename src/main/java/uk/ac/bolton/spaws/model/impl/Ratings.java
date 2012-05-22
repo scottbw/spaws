@@ -19,8 +19,8 @@ import com.navnorth.learningregistry.LRActivity;
 
 import uk.ac.bolton.spaws.model.IRatings;
 
-public class Ratings implements IRatings {
-	
+public class Ratings extends Paradata implements IRatings {
+
 	private double average = 0.0;
 	private int min = 0;
 	private int max = 5;

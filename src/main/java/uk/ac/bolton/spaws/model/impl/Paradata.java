@@ -1,0 +1,34 @@
+package uk.ac.bolton.spaws.model.impl;
+
+import uk.ac.bolton.spaws.model.IParadata;
+
+public abstract class Paradata implements IParadata{
+	
+	private String content;
+	private String contextUrl;
+
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.IParadata#getContent()
+	 */
+	public String getContent() {
+		return content;
+	}
+	
+	public void setContent(String content){
+		this.content = content;
+	}
+
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.IParadata#getContextUrl()
+	 */
+	public String getContextUrl() {
+		return contextUrl;
+	}
+	
+	public void setContextUrl(String contextUrl){
+		this.contextUrl = contextUrl;
+	}
+	
+	
+
+}

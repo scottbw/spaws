@@ -18,7 +18,7 @@ package uk.ac.bolton.spaws.model;
 /**
  * A review submission
  */
-public interface IReview extends IRating {
+public interface IReview extends IParadata {
 	
 	public static final String VERB = "reviewed";
 

@@ -24,4 +24,6 @@ public interface IParadata {
 	public abstract void addMeasure(LRActivity activity);
 
 	public abstract String getContent();
+	
+	public abstract String getContextUrl();
 }

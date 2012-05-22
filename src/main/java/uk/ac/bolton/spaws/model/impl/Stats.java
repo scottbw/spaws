@@ -19,7 +19,7 @@ import com.navnorth.learningregistry.LRActivity;
 
 import uk.ac.bolton.spaws.model.IStats;
 
-public class Stats implements IStats {
+public class Stats extends Paradata implements IStats {
 	
 	private int downloads;
 	private int embeds;
