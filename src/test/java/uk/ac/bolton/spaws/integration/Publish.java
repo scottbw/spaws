@@ -126,6 +126,5 @@ public class Publish {
 		assertEquals(1, submissions.size());
 		assertEquals("Dave", submissions.get(0).getActor().getName());
 		assertEquals("Great", submissions.get(0).getAction().getContent());
-		assertEquals(4, ((IRating)submissions.get(0).getAction()).getRating());
 	}
 }
