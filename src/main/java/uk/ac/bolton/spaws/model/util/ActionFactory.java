@@ -102,18 +102,7 @@ public class ActionFactory {
 	 */
 	private static IReview createReviewFromActivity(JSONObject activity) throws JSONException{
 		Review review = new Review();
-		
 		review.setComment(activity.getString("content"));
-		
-		JSONObject verb = activity.getJSONObject("verb");
-		
-		JSONObject measure = verb.getJSONObject("measure");
-		if (measure != null){
-			review.setMin(measure.getInt("scaleMin"));
-			review.setMax(measure.getInt("scaleMax"));
-			review.setRating(measure.getInt("value"));
-		}
-		
 		return review;
 	}
 
