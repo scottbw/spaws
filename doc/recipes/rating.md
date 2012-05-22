@@ -21,7 +21,9 @@ A rating record contains a rating from 0 to 5 but no other comments.
                 "value": 5
             },
             "context":{
-                "url": "http://my-store.com/widgets/8"
+                "objectType": "widget",
+                "id": "http://my-store.com/widgets/8",
+                "description": "Detail page"
             },
         },
         

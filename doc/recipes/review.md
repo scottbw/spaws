@@ -1,6 +1,6 @@
 #Review
 
-A review record contains a review comment and (optionally) a rating in the same format as for a rating record. The review comment is a String in the content of the activity.
+A review record contains a review comment. The review comment is a String in the content of the activity.
 
 ##Example:
 
@@ -14,14 +14,10 @@ A review record contains a review comment and (optionally) a rating in the same 
         "verb": {
             "action": "reviewed",
             "date": "2011-10-10",
-            "measure": {
-                "sampleSize": 1,
-                "scaleMin": 0,
-                "scaleMax": 5,
-                "value": 5
-            },
-             "context":{
-                "url": "http://my-store.com/widgets/8"
+            "context":{
+                "objectType": "widget",
+                "id": "http://my-store.com/widgets/8",
+                "description": "Detail page"
             },
         },
         
