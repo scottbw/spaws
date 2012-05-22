@@ -56,7 +56,7 @@ public class Publish {
 		submissions.add(new Submission(new Actor("Amy"), new Rating(1), WIDGET_URI));
 		submissions.add(new Submission(new Actor("Chloe"), new Rating(1), WIDGET_URI));
 		
-		submissions.add(new Submission(new Actor("Dave"), new Review("Great", 4), WIDGET_URI));
+		submissions.add(new Submission(new Actor("Dave"), new Review("Great"), WIDGET_URI));
 		
 		manager.publishSubmissions(submissions);
 		

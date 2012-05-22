@@ -101,7 +101,7 @@ public class NormalizingFilterTest {
 		
 		submissions.add(new Submission(new Submitter(), new Actor("Alice"), new Rating(3), resourceUrl, now));
 		submissions.add(new Submission(new Submitter(), new Actor("Bob"), new Rating(1), resourceUrl, now));	
-		submissions.add(new Submission(new Submitter(), new Actor("Chloe"), new Review("Great",5), resourceUrl, later));	
+		submissions.add(new Submission(new Submitter(), new Actor("Chloe"), new Review("Great"), resourceUrl, later));	
 		
 		List<ISubmission> results = new NormalizingFilter(IReview.VERB).filter(submissions);
 		
