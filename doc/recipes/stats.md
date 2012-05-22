@@ -22,7 +22,12 @@ Current statistics include:
                 "embeds": 0,
                 "likes": 5,
                 "views": 211
-            }
+            },
+            "context":{
+                "objectType": "widget",
+                "id": "http://my-store.com/widgets/8",
+                "description": "Detail page"
+            },
         },
         
         "object": {

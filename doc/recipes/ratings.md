@@ -17,7 +17,12 @@ Note as ratings are composite, there is no actor component.
                 "scaleMin": 0,
                 "scaleMax": 5,
                 "value": 22.5
-            }
+            },
+            "context":{
+                "objectType": "widget",
+                "id": "http://my-store.com/widgets/8",
+                "description": "Detail page"
+            },
         },
         
         "object": {
