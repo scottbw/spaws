@@ -10,8 +10,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.ac.bolton</groupId>
 	<artifactId>spaws</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.2</version>
 	<name>SPAWS</name>
+	<description>SPAWS is a library for widget stores to support synchronising "paradata" including reviews, ratings, and download stats using the Learning Registry.</description>
 	<packaging>jar</packaging>
 	<licenses>
 		<license>
@@ -42,6 +43,7 @@
 	</dependencies>
 
 	<url>https://github.com/scottbw/spaws</url>
+	
 	<scm>
 		<connection>scm:git:git@github.com:scottbw/spaws.git</connection>
 		<developerConnection>scm:git:git@github.com:scottbw/spaws.git</developerConnection>
