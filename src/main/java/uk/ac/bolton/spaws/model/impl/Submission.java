@@ -39,7 +39,7 @@ public class Submission implements ISubmission {
 		setActor(actor);
 		setAction(action);
 		setResourceURL(resourceUrl);
-		setSubmitter(submitter);
+		setSubmitter(new Submitter());
 	}
 	
 	public Submission(ISubmitter submitter, Actor actor, IParadata action, String resourceUrl){
