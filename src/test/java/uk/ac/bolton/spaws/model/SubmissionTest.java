@@ -28,6 +28,7 @@ import com.navnorth.learningregistry.LRActivity;
 
 import uk.ac.bolton.spaws.model.impl.Actor;
 import uk.ac.bolton.spaws.model.impl.Rating;
+import uk.ac.bolton.spaws.model.impl.Review;
 import uk.ac.bolton.spaws.model.impl.Submission;
 import uk.ac.bolton.spaws.model.impl.Submitter;
 
@@ -110,6 +111,24 @@ public class SubmissionTest {
 		assertEquals(0, map.get("scaleMin"));
 		assertEquals(5, map.get("scaleMax"));
 		assertEquals(2, map.get("value"));
+	}
+	
+	@Test
+	public void activityContext(){
+		Review review = new Review("OK");
+		review.setContextUrl("http://mystore.com/widgets/3");
+		Actor actor = new Actor("Alice");
+		String resourceUrl = "http://widgets.opera.com/bubbles";
+		Submitter submitter = new Submitter();
+		Date date = new Date();
+		Submission submission = new Submission(submitter, actor, review, resourceUrl, date);
+		
+		LRActivity activity = submission.getActivity();
+		@SuppressWarnings("rawtypes")
+		Map map = (Map) ((Map) ((Map) ((Map) activity.getResourceData()).get("activity")).get("verb")).get("context");
+		assertEquals("http://mystore.com/widgets/3", map.get("id"));
+		assertEquals("Widget", map.get("objectType"));
+		assertEquals("Detail page", map.get("description"));
 	}
 	
 	@Test
