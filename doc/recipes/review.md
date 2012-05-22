@@ -19,7 +19,10 @@ A review record contains a review comment and (optionally) a rating in the same 
                 "scaleMin": 0,
                 "scaleMax": 5,
                 "value": 5
-            }
+            },
+             "context":{
+                "url": "http://my-store.com/widgets/8"
+            },
         },
         
         "content": "I really like this game!",

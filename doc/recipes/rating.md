@@ -19,7 +19,10 @@ A rating record contains a rating from 0 to 5 but no other comments.
                 "scaleMin": 0,
                 "scaleMax": 5,
                 "value": 5
-            }
+            },
+            "context":{
+                "url": "http://my-store.com/widgets/8"
+            },
         },
         
         "object": {
