@@ -19,6 +19,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import uk.ac.bolton.spaws.ParadataManager;
 import uk.ac.bolton.spaws.model.INode;
 import uk.ac.bolton.spaws.model.ISubmission;
@@ -30,9 +33,9 @@ import uk.ac.bolton.spaws.model.impl.Submitter;
 public class StatsTest {
 	
 	private static final String MIMAS_TEST_NODE_URL = "http://alpha.mimas.ac.uk";
-	private static final String WIDGET_URI = "http://wookie.apache.org/widgets/youtube";
+	private static final String WIDGET_URI = "http://wookie.apache.org/widgets/butterfly";
 	private static INode node;
-	
+	@BeforeClass
 	public static void setup() throws Exception{
 		
 		node = new Node(new URL(MIMAS_TEST_NODE_URL), "fred", "flintstone");
@@ -53,8 +56,6 @@ public class StatsTest {
 		site2.setSubmitter("SPAWS-TEST-SITE-2");
 		Stats site2stats = new Stats();
 		site2stats.setDownloads(22);
-		site2stats.setEmbeds(2);
-		site2stats.setLikes(2);
 		site2stats.setViews(222);
 		
 		
@@ -62,8 +63,12 @@ public class StatsTest {
 		submissions.add(new Submission(site2, null, site2stats, WIDGET_URI));
 		
 		manager.publishSubmissions(submissions);
+	
+	}
+	
+	@Test
+	public void test(){
 		
-		Thread.sleep(20000);
 	}
 
 }
