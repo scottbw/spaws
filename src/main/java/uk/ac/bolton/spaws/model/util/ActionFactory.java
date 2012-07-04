@@ -22,9 +22,11 @@ import uk.ac.bolton.spaws.model.IParadata;
 import uk.ac.bolton.spaws.model.IRating;
 import uk.ac.bolton.spaws.model.IRatings;
 import uk.ac.bolton.spaws.model.IReview;
+import uk.ac.bolton.spaws.model.IStats;
 import uk.ac.bolton.spaws.model.impl.Rating;
 import uk.ac.bolton.spaws.model.impl.Ratings;
 import uk.ac.bolton.spaws.model.impl.Review;
+import uk.ac.bolton.spaws.model.impl.Stats;
 
 public class ActionFactory {
 
@@ -51,10 +53,36 @@ public class ActionFactory {
 				else if (verb.equals(IRatings.VERB)){
 					return createRatingsFromActivity(activity);								
 				}
+				else if (verb.equals(IStats.VERB)){
+					return createStatsFromActivity(activity);								
+				}
 			}
 		}
 		
 		return null;
+	}
+
+	private static IParadata createStatsFromActivity(JSONObject activity) throws JSONException {
+		Stats stats = new Stats();
+				
+		JSONObject verb = activity.getJSONObject("verb");
+		
+		if (!verb.has("measure")){
+			return stats;
+		}
+		
+		JSONObject measure = verb.getJSONObject("measure");
+		
+		if (measure.has("downloads"))
+			stats.setDownloads(measure.getInt("downloads"));
+		if (measure.has("embeds"))
+			stats.setEmbeds(measure.getInt("embeds"));
+		if (measure.has("likes"))
+			stats.setLikes(measure.getInt("likes"));
+		if (measure.has("views"))
+			stats.setViews(measure.getInt("views"));
+		
+		return stats;
 	}
 
 	/**
