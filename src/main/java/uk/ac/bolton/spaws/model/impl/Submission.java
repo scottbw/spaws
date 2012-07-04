@@ -141,12 +141,14 @@ public class Submission implements ISubmission {
 		
 		//
 		// We're overriding equals for submissions in that if its the same actor using the same verb for the same
-		// resource then its a duplicate.
+		// resource, and was submitted using the same submitter,then its a duplicate.
 		//
-		if ( this.getActor().getName().equals( ((ISubmission)other).getActor().getName()) ){
-			if ( this.getAction().getVerb().equals( ((ISubmission)other).getAction().getVerb())){
-				if ( this.getResourceURL().equals( ((ISubmission)other).getResourceURL())){
-					return true;
+		if (this.getSubmitter().getSubmitter().equals(((ISubmission)other).getSubmitter().getSubmitter())){
+			if ( this.getActor() == null && ((ISubmission)other).getActor() == null || this.getActor().getName().equals( ((ISubmission)other).getActor().getName())  ){
+				if ( this.getAction().getVerb().equals( ((ISubmission)other).getAction().getVerb())){
+					if ( this.getResourceURL().equals( ((ISubmission)other).getResourceURL())){
+						return true;
+					}
 				}
 			}
 		}
