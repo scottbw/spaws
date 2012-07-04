@@ -15,6 +15,9 @@
  */
 package uk.ac.bolton.spaws.model.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.navnorth.learningregistry.LRActivity;
 
 import uk.ac.bolton.spaws.model.IStats;
@@ -37,8 +40,12 @@ public class Stats extends Paradata implements IStats {
 	 * @see uk.ac.bolton.spaws.model.IParadata#addMeasure(com.navnorth.learningregistry.LRActivity)
 	 */
 	public void addMeasure(LRActivity activity) {
-		// TODO Auto-generated method stub
-
+		Map<String, Object> values = new HashMap<String, Object>();
+		values.put("downloads", this.getDownloads());
+		values.put("embeds", this.getEmbeds());
+		values.put("likes", this.getLikes());
+		values.put("views", this.getViews());
+		activity.addMeasureToVerb(values);
 	}
 
 	/* (non-Javadoc)
