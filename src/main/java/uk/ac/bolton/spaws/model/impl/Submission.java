@@ -62,7 +62,8 @@ public class Submission implements ISubmission {
 	 */
 	public LRActivity getActivity(){
 		LRActivity activity = new LRActivity(getResourceURL(), getSubmitter().getSubmitter(), getSubmitter().getSubmitterType(), getSubmitter().getSubmissionTOS(), getSubmitter().getSubmissionAttribution(), getSubmitter().getSigner());
-		activity.addActor("actor", getActor().getName(), getActor().getUrl(), null);
+		if (getActor() != null)
+			activity.addActor("actor", getActor().getName(), getActor().getUrl(), null);
 		activity.addVerb(getAction().getVerb(), null, null, null, null);
 		if (this.action.getContextUrl() != null){
 			activity.addContextToVerb("Widget", this.action.getContextUrl(), "Detail page");
