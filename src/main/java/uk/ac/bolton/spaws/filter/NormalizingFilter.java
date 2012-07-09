@@ -65,9 +65,13 @@ public class NormalizingFilter{
 		// Iterate and add 
 		//
 		for (ISubmission submission:sortedSubmissions){
-			if (submission.getAction().getVerb().equals(verb)){
-				if (!filteredSubmissions.contains(submission)){
-					filteredSubmissions.add(submission);
+			if (submission.getAction() != null){
+				if (submission.getAction().getVerb() != null){
+					if (submission.getAction().getVerb().equals(verb)){
+						if (!filteredSubmissions.contains(submission)){
+							filteredSubmissions.add(submission);
+						}
+					}
 				}
 			}
 		}
