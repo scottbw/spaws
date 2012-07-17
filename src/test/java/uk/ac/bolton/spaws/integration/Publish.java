@@ -41,7 +41,7 @@ import uk.ac.bolton.spaws.model.impl.Submitter;
 public class Publish {
 	
 	private static final String MIMAS_TEST_NODE_URL = "http://alpha.mimas.ac.uk";
-	private static final String WIDGET_URI = "http://wookie.apache.org/widgets/youtube";
+	private static final String WIDGET_URI = "http://wookie.apache.org/widgets/test-zzz";
 	private static INode node;
 		
 	@BeforeClass
