@@ -79,13 +79,8 @@ public class ParadataPublisher {
 		
 		LREnvelope doc = activity;
 
-		// TODO sign the doc
 		if (this.signer != null){
-			try {
-				doc = this.signer.sign(doc);
-			} catch (LRException e) {
-				return;
-			}
+			doc = this.signer.sign(doc);
 		}
 
 		// Add envelope to exporter
