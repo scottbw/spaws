@@ -49,13 +49,6 @@ public class Stats extends Paradata implements IStats {
 	}
 
 	/* (non-Javadoc)
-	 * @see uk.ac.bolton.spaws.model.IParadata#getContent()
-	 */
-	public String getContent() {
-		return null;
-	}
-
-	/* (non-Javadoc)
 	 * @see uk.ac.bolton.spaws.model.IStats#getDownloads()
 	 */
 	public int getDownloads() {
