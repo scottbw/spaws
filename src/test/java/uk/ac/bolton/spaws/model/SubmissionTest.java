@@ -36,6 +36,7 @@ public class SubmissionTest {
 
 	@Test
 	public void create(){
+		@SuppressWarnings("unused")
 		Submission submission = new Submission();
 	}
 	
