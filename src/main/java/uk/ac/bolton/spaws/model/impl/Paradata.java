@@ -11,6 +11,12 @@ public abstract class Paradata implements IParadata{
 	 * @see uk.ac.bolton.spaws.model.IParadata#getContent()
 	 */
 	public String getContent() {
+		//
+		// We have to use empty string rather than null,
+		// as otherwise this causes problems for signing a LR document
+		//
+		if (content == null) return "";
+		
 		return content;
 	}
 	
