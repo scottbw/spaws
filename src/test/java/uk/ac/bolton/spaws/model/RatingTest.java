@@ -70,6 +70,6 @@ public class RatingTest {
 	@Test
 	public void content(){
 		Rating rating = new Rating();
-		assertNull(rating.getContent());
+		assertEquals("", rating.getContent());
 	}
 }
