@@ -27,6 +27,24 @@ import uk.ac.bolton.spaws.model.ISubmitter;
 public class SubmitterSubmissionsFilter {
 	
 	/**
+	 * Filter a set of submissions removing any submissions from submitters whose
+	 * name is in the omit list
+	 * @param submissions the submissions to filter
+	 * @param submitters the submitters to omit
+	 * @return the filtered list of submissions
+	 */
+	public List<ISubmission> omit(List<ISubmission> submissions, List<String> submitters){
+		ArrayList<ISubmission> filteredSubmissions = new ArrayList<ISubmission>();
+		for (ISubmission submission: submissions){
+			if (submission.getSubmitter() != null){
+				if (!submitters.contains(submission.getSubmitter().getSubmitter()))
+					filteredSubmissions.add(submission);
+			}
+		}
+		return filteredSubmissions;
+	}
+	
+	/**
 	 * Filter a set of submissions removing any from the supplied submitter
 	 * @param submissions the list of submissions to filter
 	 * @param submitter the submitter whose submissions should be omitted from the results
