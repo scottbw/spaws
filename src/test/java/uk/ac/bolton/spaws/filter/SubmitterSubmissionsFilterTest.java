@@ -116,5 +116,72 @@ public class SubmitterSubmissionsFilterTest {
 		assertEquals(1, new SubmitterSubmissionsFilter().omit(submissions, omitList).size());
 		assertEquals("http://test1", new SubmitterSubmissionsFilter().omit(submissions, omitList).get(0).getResourceURL());
 	}
+	
+	@Test
+	public void multipleSubmitterTest4(){
+		ISubmission submission1 = new Submission();
+		submission1.setSubmitter(goodSite);
+		submission1.setResourceURL("http://test1");
+		ISubmission submission2 = new Submission();
+		submission2.setSubmitter(badSite);
+		submission2.setResourceURL("http://test2");
+		ISubmission submission3 = new Submission();
+		submission3.setSubmitter(badSite2);
+		submission3.setResourceURL("http://test3");
+		
+		List<ISubmission> submissions = new ArrayList<ISubmission>();
+		submissions.add(submission1);
+		submissions.add(submission2);
+		submissions.add(submission3);
+		
+		List<String> includeList = new ArrayList<String>();
+		includeList.add(goodSite.getSubmitter());
+		
+		assertEquals(1, new SubmitterSubmissionsFilter().include(submissions, includeList).size());
+		assertEquals("http://test1", new SubmitterSubmissionsFilter().include(submissions, includeList).get(0).getResourceURL());
+	}
+	
+	
+	@Test
+	public void singleSubmitterTest(){
+		ISubmission submission1 = new Submission();
+		submission1.setSubmitter(goodSite);
+		submission1.setResourceURL("http://test1");
+		ISubmission submission2 = new Submission();
+		submission2.setSubmitter(badSite);
+		submission2.setResourceURL("http://test2");
+		ISubmission submission3 = new Submission();
+		submission3.setSubmitter(badSite);
+		submission3.setResourceURL("http://test3");
+		
+		List<ISubmission> submissions = new ArrayList<ISubmission>();
+		submissions.add(submission1);
+		submissions.add(submission2);
+		submissions.add(submission3);
+		
+		assertEquals(1, new SubmitterSubmissionsFilter().include(submissions, goodSite).size());
+		assertEquals("http://test1", new SubmitterSubmissionsFilter().include(submissions, goodSite).get(0).getResourceURL());
+	}
+	
+	@Test
+	public void singleSubmitterTest2(){
+		ISubmission submission1 = new Submission();
+		submission1.setSubmitter(goodSite);
+		submission1.setResourceURL("http://test1");
+		ISubmission submission2 = new Submission();
+		submission2.setSubmitter(badSite);
+		submission2.setResourceURL("http://test2");
+		ISubmission submission3 = new Submission();
+		submission3.setSubmitter(badSite);
+		submission3.setResourceURL("http://test3");
+		
+		List<ISubmission> submissions = new ArrayList<ISubmission>();
+		submissions.add(submission1);
+		submissions.add(submission2);
+		submissions.add(submission3);
+		
+		assertEquals(1, new SubmitterSubmissionsFilter().omit(submissions, badSite).size());
+		assertEquals("http://test1", new SubmitterSubmissionsFilter().omit(submissions, badSite).get(0).getResourceURL());
+	}
 
 }
