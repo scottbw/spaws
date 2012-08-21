@@ -54,8 +54,11 @@ public class Review extends Paradata implements IReview {
 		return VERB;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.bolton.spaws.model.IParadata#addMeasure(com.navnorth.learningregistry.LRActivity)
+	 */
 	public void addMeasure(LRActivity activity) {
-		// TODO Auto-generated method stub
+		// There is no measure for a Review instance, its just a comment
 	}	
 
 }
