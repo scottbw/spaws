@@ -87,6 +87,7 @@ public class ParadataPublisher {
 		exporterLR.addDocument(doc);
 		
 		// Send data and get responses
+		@SuppressWarnings("unused")
 		List<LRResponse> responses;
 		try {
 			responses = exporterLR.sendData();
