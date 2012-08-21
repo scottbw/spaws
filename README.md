@@ -2,7 +2,7 @@
 
 SPAWS is a library for widget stores to support synchronising "paradata" including reviews, ratings, and download stats using the Learning Registry.
 
-There is some more info here:
+There is some more background information here:
 
 http://scottbw.wordpress.com/tag/oerri/
 
@@ -14,16 +14,31 @@ For example:
 ```java
 
 node = new Node(myNodeUrl);
-
 ISubmitter submitter = new Submitter();
 submitter.setSubmitter("ME");
-		
 ParadataManager manager = new ParadataManager(submitter, node);
 		
-List<ISubmission> submissions = manager.getExternalRatingSubmissions("http://my.resource.name");
+List<ISubmission> submissions = manager.getExternalSubmissions("http://my.resource.name");
 
 ```
 
+See the ParadataManager class for descriptions for all the methods available.
+
 ## Including the library in a project
 
-Snapshots are available from the Sonatype snapshots repository; releases will eventually be available from maven central.
+Release artefacts are available from the Sonatype OSS repository for inclusion using Maven or Ivy. For Maven, you can use the following in your pom.xml:
+
+    <dependency>
+      <groupId>uk.ac.bolton</groupId>
+      <artifactId>spaws</artifactId>
+      <version>0.5</version>
+    </dependency>
+
+To include the Sonatype repository, add:
+
+    <repository>
+        <id>oss.sonatype.org</id>
+        <url>https://oss.sonatype.org/content/repositories/releases</url>
+    </repository>
+    
+Note that SPAWS relies on the LRJavaLib library jar being available; for more information see https://github.com/navnorth/LRJavaLib
