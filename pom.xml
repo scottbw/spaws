@@ -10,7 +10,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.ac.bolton</groupId>
 	<artifactId>spaws</artifactId>
-	<version>0.6</version>
+	<version>0.7</version>
 	<name>SPAWS</name>
 	<description>SPAWS is a library for widget stores to support synchronising "paradata" including reviews, ratings, and download stats using the Learning Registry.</description>
 	<packaging>jar</packaging>
