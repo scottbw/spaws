@@ -24,6 +24,8 @@ List<ISubmission> submissions = manager.getExternalSubmissions("http://my.resour
 
 See the ParadataManager class for descriptions for all the methods available.
 
+For a more detailed example, see the [UserReviewService class in th Edukapp project](http://code.google.com/p/edukapp/source/browse/trunk/src/main/java/uk/ac/edukapp/service/UserReviewService.java).
+
 ## Including the library in a project
 
 Release artefacts are available from the Sonatype OSS repository for inclusion using Maven or Ivy. For Maven, you can use the following in your pom.xml:
